@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home – Dobór komputera stacjonarnego</title>
+  <title>Bazowy – Dobór komputera stacjonarnego</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -17,15 +17,7 @@
     </nav>
   </header>
 
-  <section class="modebar">
-    <div class="segmented" role="tablist" aria-label="Wybór trybu">
-      <label class="seg"><input type="radio" name="build_mode" value="Bazowy" checked /><span role="tab" aria-selected="true">Bazowy</span></label>
-      <label class="seg"><input type="radio" name="build_mode" value="Pro" /><span role="tab" aria-selected="false">Pro</span></label>
-      <label class="seg"><input type="radio" name="build_mode" value="SimRig" /><span role="tab" aria-selected="false">SimRig</span></label>
-    </div>
-    <p id="mode-note" class="tiny">Tryb <strong>Bazowy</strong> — prosty dobór bez szczegółowej konfiguracji podzespołów.</p>
-  </section>
-
+  <!-- Progress bar (sticky) -->
   <div class="progressbar" aria-label="Postęp"> 
     <div class="progress-fill"></div>
     <div class="progress-text">Krok <span id="progress-step">1</span>/<span id="progress-total">8</span></div>
@@ -33,17 +25,18 @@
 
   <main class="container">
     <section class="hero">
-      <h1>Szybki kwestionariusz – dobór komputera stacjonarnego</h1>
+      <h1>Kwestionariusz — tryb <strong>Bazowy</strong></h1>
       <p class="subtitle">Zaznacz lub uzupełnij — wystarczy kilka minut.</p>
     </section>
 
-    <!-- MODE: Bazowy -->
-    <form id="form-bazowy" class="card mode" data-mode="Bazowy" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+    <!-- TYLKO: Bazowy -->
+    <form id="form-bazowy" class="card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera (Bazowy)" />
       <input type="hidden" name="submitted_at" id="submitted_at_b" />
-      <input type="hidden" name="form_version" value="v3.4-bazowy" />
+      <input type="hidden" name="form_version" value="v3.5-bazowy" />
       <input type="hidden" name="build_mode" value="Bazowy" />
 
+      <!-- 1: Zastosowanie główne -->
       <section class="block" data-step="1">
         <h2><span class="num">1</span> Zastosowanie główne</h2>
         <div class="grid">
@@ -57,7 +50,9 @@
             <input type="text" name="usage_other" placeholder="Doprecyzuj (opcjonalnie)" />
           </label>
         </div>
-        <div class="sub cond" data-condition="Gry" hidden>
+
+        <!-- Gry (podkategoria) -->
+        <div class="sub cond fade" data-condition="Gry" hidden>
           <h3>Podkategoria: Gry</h3>
           <div class="grid">
             <label><input type="checkbox" name="gaming_kinds[]" value="E‑sport" /> E‑sport</label>
@@ -70,6 +65,7 @@
         </div>
       </section>
 
+      <!-- 2: Obudowa (kompaktowo + opis z prawej) -->
       <section class="block" data-step="2">
         <h2><span class="num">2</span> Obudowa — preferencje rozmiaru</h2>
         <div class="case-layout compact">
@@ -87,6 +83,7 @@
         </div>
       </section>
 
+      <!-- 3: Dysk -->
       <section class="block" data-step="3">
         <h2><span class="num">3</span> Dysk — preferencje dla dysku systemowego</h2>
         <p class="tiny">Jeśli wybierzesz „Nie”, <strong>skonsultujemy to oddzielnie</strong> po kontakcie.</p>
@@ -128,6 +125,7 @@
         </div>
       </section>
 
+      <!-- 4: Monitor -->
       <section class="block" data-step="4">
         <h2><span class="num">4</span> Monitor — czy chcesz skonsultować?</h2>
         <p class="tiny">Możesz zostawić puste — skonsultujemy to oddzielnie.</p>
@@ -199,6 +197,7 @@
         </div>
       </section>
 
+      <!-- 5: Części posiadane -->
       <section class="block" data-step="5">
         <h2><span class="num">5</span> Czy masz już jakieś części?</h2>
         <div class="grid">
@@ -211,12 +210,14 @@
         </div>
       </section>
 
+      <!-- 6: Uwagi -->
       <section class="block" data-step="6">
         <h2><span class="num">6</span> Dodatkowe uwagi / oczekiwania</h2>
         <textarea name="notes" rows="4" placeholder="np. „ma być bardzo cichy”, „dużo RGB”, „pod 2–3 monitory”, „możliwa rozbudowa”, „chłodzenie wodne”"></textarea>
         <p class="tiny">(Możesz zostawić puste — dopytamy w odpowiedzi)</p>
       </section>
 
+      <!-- 7: Kontakt -->
       <section class="block" data-step="7">
         <h2><span class="num">7</span> Kontakt</h2>
         <p class="tiny"><strong>Informacja o kontakcie jest niezbędna</strong> do przygotowania rekomendacji.</p>
@@ -224,6 +225,7 @@
         <label class="inline">Imię: <input type="text" name="contact_name" placeholder="Imię (opcjonalnie)" /></label>
       </section>
 
+      <!-- 8: Budżet -->
       <section class="block" data-step="8">
         <h2><span class="num">8</span> Budżet na komputer (bez monitora i peryferiów)</h2>
         <p class="tiny">Peryferia = klawiatura, mysz, słuchawki, głośniki.</p>
@@ -246,8 +248,6 @@
         <p class="tiny disclaimer">Te wybory nie są ostateczne — potraktuj je jako wstępny pogląd Twoich potrzeb. Skonsultuję z Tobą szczegóły osobno przed rekomendacją.</p>
       </div>
     </form>
-
-    <!-- Tryby Pro/SimRig zostają jak wcześniej; tu skrócone dla czytelności. -->
 
     <section class="thanks card" id="thanks" hidden>
       <h2>Dziękuję! Odpowiem w ciągu jednego dnia.</h2>

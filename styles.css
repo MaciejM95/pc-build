@@ -9,13 +9,7 @@ html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-fa
 .nav a:hover{ color:var(--text); background:#0f1724 }
 .nav a.active{ color:#0b0f14; background:linear-gradient(135deg,var(--accent),var(--accent-2)); font-weight:700 }
 @media (max-width:560px){ .topbar{ gap:8px } .nav{ width:100% } }
-.modebar{ padding:10px 14px; border-bottom:1px solid var(--border); background:#0d1421; position:sticky; top:56px; z-index:49 }
-.segmented{ display:inline-flex; border:1px solid var(--border); border-radius:10px; overflow:hidden }
-.seg{ display:inline-flex; align-items:center }
-.seg input{ display:none }
-.seg span{ padding:8px 12px; cursor:pointer; color:var(--muted) }
-.seg input:checked + span{ background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0b0f14; font-weight:700 }
-.progressbar{ position:sticky; top:102px; width:100%; background:#0b1320; border-bottom:1px solid var(--border); display:grid; grid-template-columns:1fr auto; align-items:center; padding:8px 14px; z-index:48 }
+.progressbar{ position:sticky; top:56px; width:100%; background:#0b1320; border-bottom:1px solid var(--border); display:grid; grid-template-columns:1fr auto; align-items:center; padding:8px 14px; z-index:48 }
 .progress-fill{ height:6px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); border-radius:6px; width:14% }
 .progress-text{ color:var(--muted); font-size:.9rem; margin-left:10px }
 .container{ max-width:980px; margin:0 auto; padding:24px }
