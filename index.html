@@ -136,13 +136,69 @@
         </div>
       </section>
 
-      <!-- 5: Monitor — czy chcesz skonsultować? (przesunięte pod OS) -->
+      <!-- 5: Monitor — czy chcesz skonsultować? (z podkategoriami) -->
       <section class="block">
         <h2><span class="num">5</span> Monitor — czy chcesz skonsultować?</h2>
         <p class="tiny">Możesz zostawić puste — skonsultujemy to oddzielnie.</p>
         <div class="grid">
           <label><input type="radio" name="monitor_consult" value="Nie" /> Nie</label>
           <label><input type="radio" name="monitor_consult" value="Tak" /> Tak</label>
+        </div>
+        <div class="sub" id="monitor-details" hidden>
+          <h3>Parametry monitora</h3>
+          <div class="grid">
+            <label>Ilość monitorów:
+              <select name="monitor_count">
+                <option>1</option>
+                <option>2</option>
+                <option>3+</option>
+              </select>
+            </label>
+            <label>Rodzaj:
+              <select name="monitor_type">
+                <option>Biuro/uniwersalny</option>
+                <option>Gaming</option>
+                <option>Pro grafika/video</option>
+                <option>Ultrawide</option>
+                <option>Zakrzywiony</option>
+              </select>
+            </label>
+            <label>Odświeżanie:
+              <select name="monitor_refresh">
+                <option>60 Hz</option>
+                <option>75 Hz</option>
+                <option>100 Hz</option>
+                <option>120 Hz</option>
+                <option>144 Hz</option>
+                <option>165 Hz</option>
+                <option>240 Hz+</option>
+              </select>
+            </label>
+            <label>Rozmiar:
+              <select name="monitor_size">
+                <option>24"</option>
+                <option>27"</option>
+                <option>32"</option>
+                <option>34"+</option>
+              </select>
+            </label>
+            <label>Rozdzielczość:
+              <select name="monitor_res">
+                <option>Full HD</option>
+                <option>1440p</option>
+                <option>4K</option>
+                <option>UWQHD</option>
+              </select>
+            </label>
+            <label>Rodzaj matrycy:
+              <select name="monitor_panel">
+                <option>IPS</option>
+                <option>VA</option>
+                <option>TN</option>
+                <option>OLED</option>
+              </select>
+            </label>
+          </div>
         </div>
       </section>
 
@@ -196,11 +252,12 @@
       </section>
 
       <input type="hidden" name="submitted_at" id="submitted_at" />
-      <input type="hidden" name="form_version" value="v2.7" />
+      <input type="hidden" name="form_version" value="v2.8" />
 
       <div class="actions">
         <button type="submit" id="submit-btn">Wyślij</button>
         <p id="status" role="status" aria-live="polite"></p>
+        <p class="tiny disclaimer">Te wybory nie są ostateczne — potraktuj je jako wstępny pogląd Twoich potrzeb. Skonsultuję z Tobą szczegóły osobno przed rekomendacją.</p>
       </div>
     </form>
 

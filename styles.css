@@ -34,7 +34,7 @@ textarea { resize: vertical; }
 .sub.minor { background: var(--sub-minor); border-left-color: var(--accent-2); }
 
 .num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0b0f14; font-weight: 800; margin-right: 8px; }
-.actions { display: flex; align-items: center; gap: 16px; }
+.actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .button, button { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0b0f14; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 700; cursor: pointer; text-decoration: none; }
 button:hover, .button:hover { filter: brightness(1.08); }
 .tiny { color: var(--muted); font-size: 0.9rem; margin: 6px 0 0; display: block; }
@@ -49,3 +49,6 @@ button:hover, .button:hover { filter: brightness(1.08); }
 
 /* Budżet */
 .budget-grid label { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: #0f1521; }
+
+/* Disclaimer under actions */
+.disclaimer { flex-basis: 100%; color: var(--muted); }
