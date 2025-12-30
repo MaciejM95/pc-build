@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pl">
 <head>
@@ -28,6 +29,7 @@
       <!-- Ukryte pola techniczne -->
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera" />
 
+      <!-- 1: Zastosowanie główne (warunkowe detale) -->
       <section class="block">
         <h2>1️⃣ Do czego głównie będzie używany komputer? <span class="hint">(można zaznaczyć więcej niż jedną opcję)</span></h2>
         <div class="grid">
@@ -42,64 +44,245 @@
             <input type="text" name="usage_other" placeholder="Doprecyzuj (opcjonalnie)" />
           </label>
         </div>
+
+        <!-- Detale: GRY -->
+        <div class="sub cond" data-condition="Gry" hidden>
+          <h3>Szczegóły — Gry</h3>
+          <div class="grid">
+            <label><input type="checkbox" name="gaming_kinds[]" value="E‑sport (CS, LoL, Valorant)" /> E‑sport (CS, LoL, Valorant)</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="Gry AAA (Wiedźmin, Cyberpunk, God of War)" /> Gry AAA (Wiedźmin, Cyberpunk, God of War)</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="VR" /> VR</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="SimRacing" /> SimRacing</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="Strategie (RTS/4X)" /> Strategie (RTS/4X)</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="MMO" /> MMO</label>
+            <label class="inline">Inne: <input type="text" name="gaming_other" placeholder="np. symulatory lotnicze" /></label>
+          </div>
+          <fieldset class="sub">
+            <legend>Monitor do gier</legend>
+            <div class="grid">
+              <label>Rozdzielczość:
+                <select name="gaming_resolution">
+                  <option value="">(wybierz lub zostaw puste)</option>
+                  <option>Full HD</option>
+                  <option>1440p</option>
+                  <option>4K</option>
+                  <option>Ultrawide (UWQHD/5K2K)</option>
+                </select>
+              </label>
+              <label>Odświeżanie:
+                <select name="gaming_refresh">
+                  <option value="">(wybierz lub zostaw puste)</option>
+                  <option>60 Hz</option>
+                  <option>75 Hz</option>
+                  <option>120 Hz</option>
+                  <option>144 Hz</option>
+                  <option>165 Hz</option>
+                  <option>240 Hz+</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Detale: PRACA BIUROWA -->
+        <div class="sub cond" data-condition="Praca biurowa / nauka / internet" hidden>
+          <h3>Szczegóły — Praca biurowa / nauka</h3>
+          <div class="grid">
+            <label>Liczba kart w przeglądarce: <input type="number" name="office_tabs" min="1" max="100" placeholder="np. 20" /></label>
+            <label>Wideokonferencje: 
+              <select name="office_calls">
+                <option>Rzadko</option>
+                <option>Często</option>
+                <option>Cały dzień</option>
+              </select>
+            </label>
+            <label>Pakiet biurowy: <input type="text" name="office_suite" placeholder="np. Microsoft 365, Google Workspace" /></label>
+          </div>
+        </div>
+
+        <!-- Detale: GRAFIKA -->
+        <div class="sub cond" data-condition="Grafika / obróbka zdjęć" hidden>
+          <h3>Szczegóły — Grafika / zdjęcia</h3>
+          <div class="grid">
+            <label>Oprogramowanie: <input type="text" name="photo_apps" placeholder="np. Photoshop, Lightroom" /></label>
+            <label>Wymagana dokładność kolorów: 
+              <select name="photo_color">
+                <option>Standardowa</option>
+                <option>Wysoka (kalibracja, 10‑bit)</option>
+              </select>
+            </label>
+            <label>GPU akceleracja: 
+              <select name="photo_gpu">
+                <option>Tak</option>
+                <option>Nie</option>
+                <option>Nie wiem</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <!-- Detale: MONTAŻ WIDEO -->
+        <div class="sub cond" data-condition="Montaż wideo" hidden>
+          <h3>Szczegóły — Wideo</h3>
+          <div class="grid">
+            <label>NLE: <input type="text" name="video_nle" placeholder="np. Premiere, DaVinci Resolve" /></label>
+            <label>Rozdzielczość materiału: 
+              <select name="video_res">
+                <option>Full HD</option>
+                <option>4K</option>
+                <option>6K/8K</option>
+              </select>
+            </label>
+            <label>Kodeki: <input type="text" name="video_codecs" placeholder="np. H.264, HEVC, RAW" /></label>
+            <label>Proxy: 
+              <select name="video_proxy">
+                <option>Tak</option>
+                <option>Nie</option>
+                <option>Nie wiem</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <!-- Detale: PROGRAMOWANIE -->
+        <div class="sub cond" data-condition="Programowanie" hidden>
+          <h3>Szczegóły — Programowanie</h3>
+          <div class="grid">
+            <label>Obszar: 
+              <select name="dev_area">
+                <option>Web</option>
+                <option>Aplikacje desktop</option>
+                <option>Data Science / ML</option>
+                <option>Embedded</option>
+                <option>Game Dev</option>
+              </select>
+            </label>
+            <label>Kompilacje/VM/Containers: 
+              <select name="dev_env">
+                <option>Lekkie</option>
+                <option>Średnie</option>
+                <option>Ciężkie (VM/Docker/Kube)</option>
+              </select>
+            </label>
+          </div>
+        </div>
       </section>
 
+      <!-- CASE: Obudowa z grafiką -->
       <section class="block">
-        <h2>2️⃣ Jeśli gry – w co grasz i jak?</h2>
+        <h2>Obudowa — preferencje rozmiaru</h2>
+        <p class="tiny">Poniżej poglądowe rozmiary obudów. Wybierz preferowany typ lub zostaw bez znaczenia.</p>
+        <div class="case-illustration">
+          <img src="assets/cases.svg" alt="Schemat rozmiarów obudów" />
+        </div>
         <div class="grid">
-          <label><input type="checkbox" name="gaming[]" value="Nie dotyczy" /> Nie dotyczy</label>
-          <label><input type="checkbox" name="gaming[]" value="Gry e-sport (CS, LoL, Valorant)" /> Gry e-sport (CS, LoL, Valorant)</label>
-          <label><input type="checkbox" name="gaming[]" value="Gry AAA (Wiedźmin, Cyberpunk, GTA itp.)" /> Gry AAA (Wiedźmin, Cyberpunk, GTA itp.)</label>
-          <label><input type="checkbox" name="gaming[]" value="VR" /> VR</label>
+          <label><input type="radio" name="case_size" value="Mini‑PC (SFF)" /> Mini‑PC (SFF)</label>
+          <label><input type="radio" name="case_size" value="Mini‑ITX" /> Mini‑ITX</label>
+          <label><input type="radio" name="case_size" value="mATX" /> mATX</label>
+          <label><input type="radio" name="case_size" value="ATX" /> ATX</label>
+          <label><input type="radio" name="case_size" value="Full Tower" /> Full Tower</label>
+          <label><input type="radio" name="case_size" value="Bez znaczenia" /> Bez znaczenia</label>
         </div>
-        <fieldset class="sub">
-          <legend>Rozdzielczość monitora (jeśli wiesz)</legend>
-          <label><input type="radio" name="resolution" value="Full HD" /> Full HD</label>
-          <label><input type="radio" name="resolution" value="1440p" /> 1440p</label>
-          <label><input type="radio" name="resolution" value="4K" /> 4K</label>
-          <label><input type="radio" name="resolution" value="Nie wiem" /> Nie wiem</label>
-        </fieldset>
       </section>
 
+      <!-- STORAGE: Dysk systemowy i dane (warunkowe) -->
       <section class="block">
-        <h2>3️⃣ Co jest dla Ciebie najważniejsze? <span class="hint">(wybierz maks. 2)</span></h2>
-        <div class="grid" data-max="2">
-          <label><input type="checkbox" name="priority[]" value="Wydajność" /> Wydajność</label>
-          <label><input type="checkbox" name="priority[]" value="Cicha praca" /> Cicha praca</label>
-          <label><input type="checkbox" name="priority[]" value="Cena" /> Cena</label>
-          <label><input type="checkbox" name="priority[]" value="Wygląd (RGB / estetyka)" /> Wygląd (RGB / estetyka)</label>
-          <label><input type="checkbox" name="priority[]" value="Mały rozmiar" /> Mały rozmiar</label>
-          <label><input type="checkbox" name="priority[]" value="Możliwość rozbudowy w przyszłości" /> Możliwość rozbudowy w przyszłości</label>
-        </div>
-        <p class="tiny" id="priority-warning" aria-live="polite"></p>
-      </section>
-
-      <section class="block">
-        <h2>4️⃣ Budżet na komputer (bez monitora i peryferiów)</h2>
+        <h2>Dysk — preferencje dla dysku systemowego</h2>
         <div class="grid">
-          <label><input type="radio" name="budget" value="Najtaniej, żeby było sensownie" /> Najtaniej, żeby było sensownie</label>
-          <label><input type="radio" name="budget" value="Środek – dobry stosunek ceny do jakości" /> Środek – dobry stosunek ceny do jakości</label>
-          <label><input type="radio" name="budget" value="Wysoki – bez większych kompromisów" /> Wysoki – bez większych kompromisów</label>
+          <label><input type="radio" name="os_drive_pref" value="Nie" /> Nie</label>
+          <label><input type="radio" name="os_drive_pref" value="Tak" /> Tak</label>
         </div>
-        <label class="inline">
-          Możesz podać kwotę (opcjonalnie):
-          <input type="number" name="budget_amount" min="0" step="100" placeholder="np. 4500" />
-          <span class="suffix">zł</span>
-        </label>
+        <div class="sub" id="storage-details" hidden>
+          <div class="grid">
+            <label>Konfiguracja dysków:
+              <select name="storage_config">
+                <option>SSD (NVMe)</option>
+                <option>SSD (NVMe) + HDD</option>
+                <option>HDD (niezalecane)</option>
+              </select>
+            </label>
+            <label>Rozmiar dysku systemowego:
+              <select name="os_drive_size">
+                <option>256 GB</option>
+                <option>512 GB</option>
+                <option>1 TB</option>
+                <option>2 TB</option>
+              </select>
+            </label>
+            <label>Rozmiar dysku danych (opcjonalnie):
+              <select name="data_drive_size">
+                <option value="">(brak / zostaw puste)</option>
+                <option>1 TB</option>
+                <option>2 TB</option>
+                <option>4 TB</option>
+                <option>6 TB+</option>
+              </select>
+            </label>
+          </div>
+        </div>
       </section>
 
+      <!-- MONITOR: konsultacja warunkowa -->
       <section class="block">
-        <h2>5️⃣ Gdzie będzie stał komputer?</h2>
+        <h2>Monitor — czy chcesz skonsultować?</h2>
+        <p class="tiny">Możesz zostawić puste — skonsultujemy to oddzielnie.</p>
         <div class="grid">
-          <label><input type="radio" name="placement" value="Na biurku" /> Na biurku</label>
-          <label><input type="radio" name="placement" value="Pod biurkiem" /> Pod biurkiem</label>
-          <label><input type="radio" name="placement" value="Mało miejsca / mała obudowa" /> Mało miejsca / mała obudowa</label>
-          <label><input type="radio" name="placement" value="Bez znaczenia" /> Bez znaczenia</label>
+          <label><input type="radio" name="monitor_consult" value="Nie" /> Nie</label>
+          <label><input type="radio" name="monitor_consult" value="Tak" /> Tak</label>
+        </div>
+        <div class="sub" id="monitor-details" hidden>
+          <div class="grid">
+            <label>Rodzaj monitora:
+              <select name="monitor_type">
+                <option>Biuro/uniwersalny</option>
+                <option>Gaming</option>
+                <option>Pro grafika/video</option>
+                <option>Ultrawide</option>
+                <option>Zakrzywiony</option>
+              </select>
+            </label>
+            <label>Odświeżanie:
+              <select name="monitor_refresh">
+                <option>60 Hz</option>
+                <option>75 Hz</option>
+                <option>100 Hz</option>
+                <option>120 Hz</option>
+                <option>144 Hz</option>
+                <option>165 Hz</option>
+                <option>240 Hz+</option>
+              </select>
+            </label>
+            <label>Rozmiar:
+              <select name="monitor_size">
+                <option>24"</option>
+                <option>27"</option>
+                <option>32"</option>
+                <option>34"+</option>
+              </select>
+            </label>
+            <label>Rozdzielczość:
+              <select name="monitor_res">
+                <option>Full HD</option>
+                <option>1440p</option>
+                <option>4K</option>
+                <option>UWQHD</option>
+              </select>
+            </label>
+            <label>Panel:
+              <select name="monitor_panel">
+                <option>IPS</option>
+                <option>VA</option>
+                <option>TN</option>
+                <option>OLED</option>
+              </select>
+            </label>
+          </div>
         </div>
       </section>
 
+      <!-- CZĘŚCI posiadane -->
       <section class="block">
-        <h2>6️⃣ Czy masz już jakieś części?</h2>
+        <h2>Czy masz już jakieś części?</h2>
         <div class="grid">
           <label><input type="radio" name="parts_have" value="Nie" /> Nie</label>
           <label class="inline">
@@ -109,8 +292,9 @@
         </div>
       </section>
 
+      <!-- System operacyjny -->
       <section class="block">
-        <h2>7️⃣ System operacyjny</h2>
+        <h2>System operacyjny</h2>
         <div class="grid">
           <label><input type="radio" name="os" value="Windows" /> Windows</label>
           <label><input type="radio" name="os" value="Linux" /> Linux</label>
@@ -118,11 +302,14 @@
         </div>
       </section>
 
+      <!-- Dodatkowe uwagi -->
       <section class="block">
-        <h2>8️⃣ Dodatkowe uwagi / oczekiwania</h2>
-        <textarea name="notes" rows="4" placeholder="np. „ma być bardzo cichy”, „bez światełek”, „pod 2 monitory”"></textarea>
+        <h2>Dodatkowe uwagi / oczekiwania</h2>
+        <textarea name="notes" rows="4" placeholder="np. „ma być bardzo cichy”, „bez światełek”, „pod 2–3 monitory”, „możliwa rozbudowa”, „chłodzenie wodne”"></textarea>
+        <p class="tiny">(Możesz zostawić puste — dopytamy w odpowiedzi)</p>
       </section>
 
+      <!-- Kontakt -->
       <section class="block">
         <h2>Kontakt</h2>
         <label class="inline">
@@ -133,9 +320,25 @@
         </label>
       </section>
 
+      <!-- BUDŻET (na końcu, przed wysyłką) -->
+      <section class="block">
+        <h2>Budżet na komputer (bez monitora i peryferiów)</h2>
+        <div class="grid">
+          <label><input type="radio" name="budget_range" value="Do 2000 zł" /> Do 2000 zł</label>
+          <label><input type="radio" name="budget_range" value="2000–5000 zł" /> 2000–5000 zł</label>
+          <label><input type="radio" name="budget_range" value="5000–10000 zł" /> 5000–10000 zł</label>
+          <label><input type="radio" name="budget_range" value="10000+ zł" /> 10000+ zł</label>
+        </div>
+        <label class="inline">
+          Lub wpisz kwotę ręcznie:
+          <input type="number" name="budget_amount" min="0" step="100" placeholder="np. 6500" />
+          <span class="suffix">zł</span>
+        </label>
+      </section>
+
       <!-- Pola meta do CSV -->
       <input type="hidden" name="submitted_at" id="submitted_at" />
-      <input type="hidden" name="form_version" value="v1.1" />
+      <input type="hidden" name="form_version" value="v2.0" />
 
       <div class="actions">
         <button type="submit" id="submit-btn">Wyślij</button>

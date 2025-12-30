@@ -1,3 +1,4 @@
+
 /* Kolorystyka: niebiesko/granatowo-szara (tech/pro) */
 :root {
   --bg: #0e1420;        /* granatowe tło */
@@ -29,7 +30,7 @@ html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); f
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 16px; margin-top: 8px; }
 .inline { display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: center; }
 label { cursor: pointer; }
-input[type="text"], input[type="number"], input[type="email"], textarea {
+input[type="text"], input[type="number"], input[type="email"], textarea, select {
   width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 10px; background: #0f1521; color: var(--text);
 }
 input[type="email"]:required { border-color: #5aa8ff; }
@@ -46,5 +47,5 @@ button:hover, .button:hover { filter: brightness(1.08); }
 .suffix { color: var(--muted); margin-left: 6px; }
 #status { min-height: 1.2em; }
 
-/* Blog */
-.muted { color: var(--muted); }
+.case-illustration { display: flex; justify-content: center; padding: 8px; background: #0d1421; border: 1px solid var(--border); border-radius: 10px; }
+.case-illustration img { max-width: 100%; height: auto; }
