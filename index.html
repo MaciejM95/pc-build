@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home – Dobór komputera stacjonarnego</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Krótki kwestionariusz doboru komputera stacjonarnego. Zaznacz lub uzupełnij — wystarczy kilka minut." />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">PC Advisor</div>
+    <nav class="nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Szybki kwestionariusz – dobór komputera stacjonarnego</h1>
+      <p class="subtitle">Zaznacz lub uzupełnij — wystarczy kilka minut.</p>
+    </section>
+
+    <!-- INFO: Podmień action na swój endpoint Formspree (np. https://formspree.io/f/xxxxxx) -->
+    <form id="pc-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate class="card">
+      <!-- Ukryte pola techniczne -->
+      <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera" />
+
+      <section class="block">
+        <h2>1️⃣ Do czego głównie będzie używany komputer? <span class="hint">(można zaznaczyć więcej niż jedną opcję)</span></h2>
+        <div class="grid">
+          <label><input type="checkbox" name="usage[]" value="Praca biurowa / nauka / internet" /> Praca biurowa / nauka / internet</label>
+          <label><input type="checkbox" name="usage[]" value="Gry" /> Gry</label>
+          <label><input type="checkbox" name="usage[]" value="Grafika / obróbka zdjęć" /> Grafika / obróbka zdjęć</label>
+          <label><input type="checkbox" name="usage[]" value="Montaż wideo" /> Montaż wideo</label>
+          <label><input type="checkbox" name="usage[]" value="Programowanie" /> Programowanie</label>
+          <label class="inline">
+            <input type="checkbox" name="usage[]" value="Inne" />
+            Inne:
+            <input type="text" name="usage_other" placeholder="Doprecyzuj (opcjonalnie)" />
+          </label>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>2️⃣ Jeśli gry – w co grasz i jak?</h2>
+        <div class="grid">
+          <label><input type="checkbox" name="gaming[]" value="Nie dotyczy" /> Nie dotyczy</label>
+          <label><input type="checkbox" name="gaming[]" value="Gry e-sport (CS, LoL, Valorant)" /> Gry e-sport (CS, LoL, Valorant)</label>
+          <label><input type="checkbox" name="gaming[]" value="Gry AAA (Wiedźmin, Cyberpunk, GTA itp.)" /> Gry AAA (Wiedźmin, Cyberpunk, GTA itp.)</label>
+          <label><input type="checkbox" name="gaming[]" value="VR" /> VR</label>
+        </div>
+        <fieldset class="sub">
+          <legend>Rozdzielczość monitora (jeśli wiesz)</legend>
+          <label><input type="radio" name="resolution" value="Full HD" /> Full HD</label>
+          <label><input type="radio" name="resolution" value="1440p" /> 1440p</label>
+          <label><input type="radio" name="resolution" value="4K" /> 4K</label>
+          <label><input type="radio" name="resolution" value="Nie wiem" /> Nie wiem</label>
+        </fieldset>
+      </section>
+
+      <section class="block">
+        <h2>3️⃣ Co jest dla Ciebie najważniejsze? <span class="hint">(wybierz maks. 2)</span></h2>
+        <div class="grid" data-max="2">
+          <label><input type="checkbox" name="priority[]" value="Wydajność" /> Wydajność</label>
+          <label><input type="checkbox" name="priority[]" value="Cicha praca" /> Cicha praca</label>
+          <label><input type="checkbox" name="priority[]" value="Cena" /> Cena</label>
+          <label><input type="checkbox" name="priority[]" value="Wygląd (RGB / estetyka)" /> Wygląd (RGB / estetyka)</label>
+          <label><input type="checkbox" name="priority[]" value="Mały rozmiar" /> Mały rozmiar</label>
+          <label><input type="checkbox" name="priority[]" value="Możliwość rozbudowy w przyszłości" /> Możliwość rozbudowy w przyszłości</label>
+        </div>
+        <p class="tiny" id="priority-warning" aria-live="polite"></p>
+      </section>
+
+      <section class="block">
+        <h2>4️⃣ Budżet na komputer (bez monitora i peryferiów)</h2>
+        <div class="grid">
+          <label><input type="radio" name="budget" value="Najtaniej, żeby było sensownie" /> Najtaniej, żeby było sensownie</label>
+          <label><input type="radio" name="budget" value="Środek – dobry stosunek ceny do jakości" /> Środek – dobry stosunek ceny do jakości</label>
+          <label><input type="radio" name="budget" value="Wysoki – bez większych kompromisów" /> Wysoki – bez większych kompromisów</label>
+        </div>
+        <label class="inline">
+          Możesz podać kwotę (opcjonalnie):
+          <input type="number" name="budget_amount" min="0" step="100" placeholder="np. 4500" />
+          <span class="suffix">zł</span>
+        </label>
+      </section>
+
+      <section class="block">
+        <h2>5️⃣ Gdzie będzie stał komputer?</h2>
+        <div class="grid">
+          <label><input type="radio" name="placement" value="Na biurku" /> Na biurku</label>
+          <label><input type="radio" name="placement" value="Pod biurkiem" /> Pod biurkiem</label>
+          <label><input type="radio" name="placement" value="Mało miejsca / mała obudowa" /> Mało miejsca / mała obudowa</label>
+          <label><input type="radio" name="placement" value="Bez znaczenia" /> Bez znaczenia</label>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>6️⃣ Czy masz już jakieś części?</h2>
+        <div class="grid">
+          <label><input type="radio" name="parts_have" value="Nie" /> Nie</label>
+          <label class="inline">
+            <input type="radio" name="parts_have" value="Tak" /> Tak, jakie:
+            <input type="text" name="parts_list" placeholder="np. dysk SSD, obudowa…" />
+          </label>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>7️⃣ System operacyjny</h2>
+        <div class="grid">
+          <label><input type="radio" name="os" value="Windows" /> Windows</label>
+          <label><input type="radio" name="os" value="Linux" /> Linux</label>
+          <label><input type="radio" name="os" value="Nie wiem / do ustalenia" /> Nie wiem / do ustalenia</label>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>8️⃣ Dodatkowe uwagi / oczekiwania</h2>
+        <textarea name="notes" rows="4" placeholder="np. „ma być bardzo cichy”, „bez światełek”, „pod 2 monitory”"></textarea>
+      </section>
+
+      <section class="block">
+        <h2>Kontakt</h2>
+        <label class="inline">
+          E‑mail: <input type="email" name="contact_email" placeholder="twoj@mail.com" required />
+        </label>
+        <label class="inline">
+          Imię: <input type="text" name="contact_name" placeholder="Imię (opcjonalnie)" />
+        </label>
+      </section>
+
+      <!-- Pola meta do CSV -->
+      <input type="hidden" name="submitted_at" id="submitted_at" />
+      <input type="hidden" name="form_version" value="v1.1" />
+
+      <div class="actions">
+        <button type="submit" id="submit-btn">Wyślij</button>
+        <p id="status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+
+    <section class="thanks card" id="thanks" hidden>
+      <h2>Dziękuję! Odpowiem w ciągu jednego dnia.</h2>
+      <p class="tiny">Jeśli nie widzisz maila, sprawdź folder „Spam”.</p>
+      <div class="actions">
+        <a href="index.html" class="button">Wróć do strony głównej</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="tiny">Dbamy o prywatność — Twoje odpowiedzi służą jedynie do rekomendacji zestawu. Nie sprzedajemy danych. Możesz poprosić o usunięcie odpowiedzi.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
