@@ -1,8 +1,10 @@
+
 // Tryb Bazowy — brak innych formularzy
 document.addEventListener('DOMContentLoaded', () => {
   const sb = document.getElementById('submitted_at_b');
   if (sb) sb.value = new Date().toISOString();
   const form = document.getElementById('form-bazowy');
+
   function bindUsageConditions() {
     const usage = form.querySelectorAll('input[name="usage[]"]');
     const blocks = form.querySelectorAll('.cond');
@@ -18,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     usage.forEach(cb => cb.addEventListener('change', update));
     update();
   }
+
   function bindDataToggles() {
     const toggles = form.querySelectorAll('[data-toggle]');
     const groups = new Map();
@@ -51,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       update();
     });
   }
+
   function bindCaseInfo() {
     const infoText = document.getElementById('case-info-text');
     const radios = form.querySelectorAll('input[name="case_size"]');
@@ -64,11 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function update() {
       const checked = form.querySelector('input[name="case_size"]:checked');
       infoText.textContent = checked ? (map[checked.value] || infoText.textContent)
-        : 'Wybierz rozmiar po lewej — tutaj pokażemy krótki opis praktycznych zastosowań.';
+                                     : 'Wybierz rozmiar po lewej — tutaj pokażemy krótki opis praktycznych zastosowań.';
     }
     radios.forEach(r => r.addEventListener('change', update));
     update();
   }
+
   function setupProgress() {
     const stepEl = document.getElementById('progress-step');
     const totalEl = document.getElementById('progress-total');
@@ -96,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(sec => observer.observe(sec));
     setProg(1);
   }
+
   function bindSubmit() {
     const status = document.getElementById('status');
     const btn = document.getElementById('submit-btn-b');
@@ -135,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
   bindUsageConditions();
   bindDataToggles();
   bindCaseInfo();
