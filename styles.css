@@ -1,15 +1,8 @@
 
 :root {
-  --bg: #0e1420;
-  --card: #161d2a;
-  --text: #e6edf5;
-  --muted: #a0adba;
-  --accent: #4da3ff;
-  --accent-2: #57d3a6;
-  --border: #2a3546;
-  --sub-bg: #0b1524;
-  --sub-minor: #0a1a2b;
-  --tooltip-bg: #0b1a2b;
+  --bg: #0e1420; --card: #161d2a; --text: #e6edf5; --muted: #a0adba;
+  --accent: #4da3ff; --accent-2: #57d3a6; --border: #2a3546;
+  --sub-bg: #0b1524; --sub-minor: #0a1a2b;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif; }
@@ -41,7 +34,6 @@ textarea { resize: vertical; }
 .sub.minor { background: var(--sub-minor); border-left-color: var(--accent-2); }
 
 .num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0b0f14; font-weight: 800; margin-right: 8px; }
-
 .actions { display: flex; align-items: center; gap: 16px; }
 .button, button { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #0b0f14; border: none; border-radius: 10px; padding: 10px 16px; font-weight: 700; cursor: pointer; text-decoration: none; }
 button:hover, .button:hover { filter: brightness(1.08); }
@@ -52,19 +44,8 @@ button:hover, .button:hover { filter: brightness(1.08); }
 
 /* Case descriptions block */
 .case-descriptions { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 8px; }
-.case-option { padding: 10px; border: 1px solid var(--border); border-radius: 10px; background: #0f1521; }
-.case-option .tooltip { position: relative; display: inline-block; }
-.case-option .tooltip::after {
-  content: attr(data-tip);
-  position: absolute; left: 0; top: 110%; z-index: 10;
-  background: var(--tooltip-bg); color: var(--text);
-  border: 1px solid var(--border); border-radius: 8px;
-  padding: 8px 10px; width: 320px; max-width: 90vw;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-  opacity: 0; pointer-events: none; transform: translateY(4px);
-  transition: opacity .14s ease, transform .14s ease;
-}
-.case-option .tooltip:hover::after { opacity: 1; transform: translateY(0); }
+.case-option { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 10px; border: 1px solid var(--border); border-radius: 10px; background: #0f1521; }
+.case-option span { font-weight: 600; }
 
 /* Budżet */
 .budget-grid label { padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: #0f1521; }

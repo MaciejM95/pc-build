@@ -131,39 +131,33 @@
         </div>
       </section>
 
-      <!-- 2: CASE: Obudowa — tooltips zamiast opisów pod spodem -->
+      <!-- 2: CASE: Obudowa — opisy pod każdą opcją (mobile-friendly) -->
       <section class="block">
         <h2><span class="num">2</span> Obudowa — preferencje rozmiaru</h2>
-        <div class="case-descriptions tooltips">
+        <div class="case-descriptions">
           <label class="case-option">
-            <span class="tooltip" data-tip="Ultra kompaktowa. Ograniczone chłodzenie i miejsce na GPU. Zwykle krótsze karty, niskoprofilowe chłodzenia.">
-              <input type="radio" name="case_size" value="Mini‑PC (SFF)" /> Mini‑PC (SFF)
-            </span>
+            <span><input type="radio" name="case_size" value="Mini‑PC (SFF)" /> Mini‑PC (SFF)</span>
+            <small class="tiny">Ultra kompaktowa. Ograniczone chłodzenie i miejsce na GPU. Zwykle krótsze karty i niskoprofilowe chłodzenia.</small>
           </label>
           <label class="case-option">
-            <span class="tooltip" data-tip="Mała płyta (ITX), 1 slot GPU. Mniej miejsca na wentylatory/radiatory. Ostrożnie z długością/wysokością GPU.">
-              <input type="radio" name="case_size" value="Mini‑ITX" /> Mini‑ITX
-            </span>
+            <span><input type="radio" name="case_size" value="Mini‑ITX" /> Mini‑ITX</span>
+            <small class="tiny">Mała płyta (ITX), 1 slot GPU. Mniej miejsca na wentylatory/radiatory — ostrożnie z długością i wysokością GPU.</small>
           </label>
           <label class="case-option">
-            <span class="tooltip" data-tip="Kompromis. Więcej slotów niż ITX, nadal mniejsza niż ATX. Dobre do zestawów cichych i kompaktowych.">
-              <input type="radio" name="case_size" value="mATX" /> mATX
-            </span>
+            <span><input type="radio" name="case_size" value="mATX" /> mATX</span>
+            <small class="tiny">Kompromis — więcej slotów niż ITX, nadal mniejsza niż ATX. Dobre dla „cicho i kompaktowo”.</small>
           </label>
           <label class="case-option">
-            <span class="tooltip" data-tip="Standard pełnej kompatybilności. Lepsze chłodzenie, łatwa rozbudowa (więcej slotów, większe chłodzenia/więcej wentylatorów).">
-              <input type="radio" name="case_size" value="ATX" /> ATX
-            </span>
+            <span><input type="radio" name="case_size" value="ATX" /> ATX</span>
+            <small class="tiny">Standard pełnej kompatybilności. Lepsze chłodzenie i łatwa rozbudowa (więcej slotów, większe chłodzenia/więcej wentylatorów).</small>
           </label>
           <label class="case-option">
-            <span class="tooltip" data-tip="Największa. Najlepszy przepływ powietrza, miejsce na chłodzenie wodne, wiele dysków, duże GPU. Dla mocnych/rozbudowywalnych zestawów.">
-              <input type="radio" name="case_size" value="Full Tower" /> Full Tower
-            </span>
+            <span><input type="radio" name="case_size" value="Full Tower" /> Full Tower</span>
+            <small class="tiny">Największa. Najlepszy przepływ powietrza, miejsce na chłodzenie wodne, wiele dysków, duże GPU. Dla mocnych/rozbudowywalnych zestawów.</small>
           </label>
           <label class="case-option">
-            <span class="tooltip" data-tip="Dobierzemy rozmiar pod Twoje potrzeby i budżet.">
-              <input type="radio" name="case_size" value="Bez znaczenia" /> Bez znaczenia
-            </span>
+            <span><input type="radio" name="case_size" value="Bez znaczenia" /> Bez znaczenia</span>
+            <small class="tiny">Dobierzemy rozmiar pod Twoje potrzeby i budżet.</small>
           </label>
         </div>
       </section>
@@ -323,7 +317,7 @@
       </section>
 
       <input type="hidden" name="submitted_at" id="submitted_at" />
-      <input type="hidden" name="form_version" value="v2.5" />
+      <input type="hidden" name="form_version" value="v2.6" />
 
       <div class="actions">
         <button type="submit" id="submit-btn">Wyślij</button>
