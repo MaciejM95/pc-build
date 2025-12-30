@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Home – Dobór komputera stacjonarnego</title>
   <link rel="stylesheet" href="styles.css" />
-  <meta name="description" content="Krótki kwestionariusz doboru komputera stacjonarnego. Zaznacz lub uzupełnij — wystarczy kilka minut." />
 </head>
 <body>
   <header class="topbar">
@@ -24,12 +23,10 @@
       <p class="subtitle">Zaznacz lub uzupełnij — wystarczy kilka minut.</p>
     </section>
 
-    <!-- INFO: Podmień action na swój endpoint Formspree (np. https://formspree.io/f/xxxxxx) -->
     <form id="pc-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate class="card">
-      <!-- Ukryte pola techniczne -->
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera" />
 
-      <!-- 1: Zastosowanie główne (warunkowe detale) -->
+      <!-- 1: Zastosowanie główne (tylko rzeczy wpływające na dobór hardware) -->
       <section class="block">
         <h2><span class="num">1</span> Do czego głównie będzie używany komputer? <span class="hint">(można zaznaczyć więcej niż jedną opcję)</span></h2>
         <div class="grid">
@@ -83,57 +80,47 @@
           </fieldset>
         </div>
 
-        <!-- Detale: PRACA BIUROWA -->
+        <!-- Praca biurowa (RAM/SSD/chłodzenie) -->
         <div class="sub cond" data-condition="Praca biurowa / nauka / internet" hidden>
           <h3>Podkategoria: Praca biurowa / nauka</h3>
           <div class="grid">
-            <label>Liczba kart w przeglądarce: <input type="number" name="office_tabs" min="1" max="100" placeholder="np. 20" /></label>
-            <label>Wideokonferencje: 
+            <label>Obciążenie (ile aplikacji/kart): <input type="number" name="office_load" min="1" max="100" placeholder="np. 20" /></label>
+            <label>Wideokonferencje:
               <select name="office_calls">
                 <option>Rzadko</option>
                 <option>Często</option>
                 <option>Cały dzień</option>
               </select>
             </label>
-            <label>Pakiet biurowy: <input type="text" name="office_suite" placeholder="np. Microsoft 365, Google Workspace" /></label>
           </div>
         </div>
 
-        <!-- Detale: GRAFIKA -->
+        <!-- Grafika -->
         <div class="sub cond" data-condition="Grafika / obróbka zdjęć" hidden>
           <h3>Podkategoria: Grafika / zdjęcia</h3>
           <div class="grid">
-            <label>Oprogramowanie: <input type="text" name="photo_apps" placeholder="np. Photoshop, Lightroom" /></label>
-            <label>Wymagana dokładność kolorów: 
+            <label>Oprogramowanie kluczowe: <input type="text" name="photo_apps" placeholder="np. Photoshop, Lightroom" /></label>
+            <label>Dokładność kolorów monitora:
               <select name="photo_color">
                 <option>Standardowa</option>
-                <option>Wysoka (kalibracja, 10‑bit)</option>
-              </select>
-            </label>
-            <label>GPU akceleracja: 
-              <select name="photo_gpu">
-                <option>Tak</option>
-                <option>Nie</option>
-                <option>Nie wiem</option>
+                <option>Wysoka</option>
               </select>
             </label>
           </div>
         </div>
 
-        <!-- Detale: MONTAŻ WIDEO -->
+        <!-- Wideo -->
         <div class="sub cond" data-condition="Montaż wideo" hidden>
           <h3>Podkategoria: Wideo</h3>
           <div class="grid">
-            <label>NLE: <input type="text" name="video_nle" placeholder="np. Premiere, DaVinci Resolve" /></label>
-            <label>Rozdzielczość materiału: 
+            <label>Rozdzielczość źródła:
               <select name="video_res">
                 <option>Full HD</option>
                 <option>4K</option>
                 <option>6K/8K</option>
               </select>
             </label>
-            <label>Kodeki: <input type="text" name="video_codecs" placeholder="np. H.264, HEVC, RAW" /></label>
-            <label>Proxy: 
+            <label>Czy używasz proxy?
               <select name="video_proxy">
                 <option>Tak</option>
                 <option>Nie</option>
@@ -142,49 +129,46 @@
             </label>
           </div>
         </div>
-
-        <!-- Detale: PROGRAMOWANIE -->
-        <div class="sub cond" data-condition="Programowanie" hidden>
-          <h3>Podkategoria: Programowanie</h3>
-          <div class="grid">
-            <label>Obszar: 
-              <select name="dev_area">
-                <option>Web</option>
-                <option>Aplikacje desktop</option>
-                <option>Data Science / ML</option>
-                <option>Embedded</option>
-                <option>Game Dev</option>
-              </select>
-            </label>
-            <label>Kompilacje/VM/Containers: 
-              <select name="dev_env">
-                <option>Lekkie</option>
-                <option>Średnie</option>
-                <option>Ciężkie (VM/Docker/Kube)</option>
-              </select>
-            </label>
-          </div>
-        </div>
       </section>
 
-      <!-- 2: CASE: Obudowa (realistyczna grafika obok siebie) -->
+      <!-- 2: CASE: Obudowa — tooltips zamiast opisów pod spodem -->
       <section class="block">
         <h2><span class="num">2</span> Obudowa — preferencje rozmiaru</h2>
-        <p class="tiny">Poglądowa grafika rozmiarów obudów (nie jest w skali 1:1):</p>
-        <div class="case-illustration realistic">
-          <img src="assets/cases-realistic.svg" alt="Realistyczna grafika rozmiarów obudów: Mini‑PC, Mini‑ITX, mATX, ATX, Full Tower" />
-        </div>
-        <div class="grid">
-          <label><input type="radio" name="case_size" value="Mini‑PC (SFF)" /> Mini‑PC (SFF)</label>
-          <label><input type="radio" name="case_size" value="Mini‑ITX" /> Mini‑ITX</label>
-          <label><input type="radio" name="case_size" value="mATX" /> mATX</label>
-          <label><input type="radio" name="case_size" value="ATX" /> ATX</label>
-          <label><input type="radio" name="case_size" value="Full Tower" /> Full Tower</label>
-          <label><input type="radio" name="case_size" value="Bez znaczenia" /> Bez znaczenia</label>
+        <div class="case-descriptions tooltips">
+          <label class="case-option">
+            <span class="tooltip" data-tip="Ultra kompaktowa. Ograniczone chłodzenie i miejsce na GPU. Zwykle krótsze karty, niskoprofilowe chłodzenia.">
+              <input type="radio" name="case_size" value="Mini‑PC (SFF)" /> Mini‑PC (SFF)
+            </span>
+          </label>
+          <label class="case-option">
+            <span class="tooltip" data-tip="Mała płyta (ITX), 1 slot GPU. Mniej miejsca na wentylatory/radiatory. Ostrożnie z długością/wysokością GPU.">
+              <input type="radio" name="case_size" value="Mini‑ITX" /> Mini‑ITX
+            </span>
+          </label>
+          <label class="case-option">
+            <span class="tooltip" data-tip="Kompromis. Więcej slotów niż ITX, nadal mniejsza niż ATX. Dobre do zestawów cichych i kompaktowych.">
+              <input type="radio" name="case_size" value="mATX" /> mATX
+            </span>
+          </label>
+          <label class="case-option">
+            <span class="tooltip" data-tip="Standard pełnej kompatybilności. Lepsze chłodzenie, łatwa rozbudowa (więcej slotów, większe chłodzenia/więcej wentylatorów).">
+              <input type="radio" name="case_size" value="ATX" /> ATX
+            </span>
+          </label>
+          <label class="case-option">
+            <span class="tooltip" data-tip="Największa. Najlepszy przepływ powietrza, miejsce na chłodzenie wodne, wiele dysków, duże GPU. Dla mocnych/rozbudowywalnych zestawów.">
+              <input type="radio" name="case_size" value="Full Tower" /> Full Tower
+            </span>
+          </label>
+          <label class="case-option">
+            <span class="tooltip" data-tip="Dobierzemy rozmiar pod Twoje potrzeby i budżet.">
+              <input type="radio" name="case_size" value="Bez znaczenia" /> Bez znaczenia
+            </span>
+          </label>
         </div>
       </section>
 
-      <!-- 3: STORAGE: Dysk systemowy i dane (warunkowe) -->
+      <!-- 3: Dysk (warunkowe) -->
       <section class="block">
         <h2><span class="num">3</span> Dysk — preferencje dla dysku systemowego</h2>
         <div class="grid">
@@ -222,7 +206,7 @@
         </div>
       </section>
 
-      <!-- 4: MONITOR: konsultacja warunkowa -->
+      <!-- 4: Monitor (warunkowe) -->
       <section class="block">
         <h2><span class="num">4</span> Monitor — czy chcesz skonsultować?</h2>
         <p class="tiny">Możesz zostawić puste — skonsultujemy to oddzielnie.</p>
@@ -281,7 +265,7 @@
         </div>
       </section>
 
-      <!-- 5: CZĘŚCI posiadane (poprawiony layout dla "Tak, jakie") -->
+      <!-- 5: Części posiadane -->
       <section class="block">
         <h2><span class="num">5</span> Czy masz już jakieś części?</h2>
         <div class="grid">
@@ -294,7 +278,7 @@
         </div>
       </section>
 
-      <!-- 6: System operacyjny -->
+      <!-- 6: System -->
       <section class="block">
         <h2><span class="num">6</span> System operacyjny</h2>
         <div class="grid">
@@ -304,7 +288,7 @@
         </div>
       </section>
 
-      <!-- 7: Dodatkowe uwagi -->
+      <!-- 7: Uwagi -->
       <section class="block">
         <h2><span class="num">7</span> Dodatkowe uwagi / oczekiwania</h2>
         <textarea name="notes" rows="4" placeholder="np. „ma być bardzo cichy”, „dużo RGB”, „pod 2–3 monitory”, „możliwa rozbudowa”, „chłodzenie wodne”"></textarea>
@@ -322,7 +306,7 @@
         </label>
       </section>
 
-      <!-- 9: BUDŻET (na końcu) -->
+      <!-- 9: Budżet -->
       <section class="block">
         <h2><span class="num">9</span> Budżet na komputer (bez monitora i peryferiów)</h2>
         <div class="grid budget-grid">
@@ -338,9 +322,8 @@
         </div>
       </section>
 
-      <!-- Pola meta do CSV -->
       <input type="hidden" name="submitted_at" id="submitted_at" />
-      <input type="hidden" name="form_version" value="v2.2" />
+      <input type="hidden" name="form_version" value="v2.5" />
 
       <div class="actions">
         <button type="submit" id="submit-btn">Wyślij</button>
