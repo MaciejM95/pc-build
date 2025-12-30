@@ -56,7 +56,9 @@
           <h3>Podkategoria: Gry</h3>
           <div class="grid">
             <label><input type="checkbox" name="gaming_kinds[]" value="E‑sport" /> E‑sport</label>
+              <span class="hint-line">LOL, CD, Valorant</span>
             <label><input type="checkbox" name="gaming_kinds[]" value="AAA" /> AAA</label>
+              <span class="hint-line">God of War, GTA, Cyberpunk </span>
             <label><input type="checkbox" name="gaming_kinds[]" value="VR" /> VR</label>
             <label><input type="checkbox" name="gaming_kinds[]" value="SimRacing" /> SimRacing</label>
             <label><input type="checkbox" name="gaming_kinds[]" value="Strategie" /> Strategie</label>
@@ -85,7 +87,7 @@
 
       <!-- 3: Dysk -->
       <section class="block" data-step="3">
-        <h2><span class="num">3</span> Dysk — preferencje dla dysku systemowego</h2>
+        <h2><span class="num">3</span> Dysk </h2>
         <p class="tiny">Jeśli wybierzesz „Nie”, <strong>skonsultujemy to oddzielnie</strong> po kontakcie.</p>
         <div class="grid">
           <label><input type="radio" name="os_drive_pref_b" value="Nie" data-toggle="radio" data-show-when="Tak" data-target="#storage-details-b" /> Nie</label>
@@ -109,7 +111,7 @@
                 <option>1 TB</option>
                 <option>2 TB</option>
               </select>
-              <span class="hint-line">Minimum to <strong>256 GB</strong>. 512 GB wygodniejsze; 1 TB zalecane przy grach/wideo.</span>
+              <span class="hint-line">Minimum to <strong>256 GB</strong>.</span>
             </label>
             <label>Rozmiar dysku danych (drugi dysk):
               <select name="data_drive_size">
@@ -236,7 +238,7 @@
           <label><input type="radio" name="budget_range" value="10000+ zł" /> 10000+&nbsp;zł</label>
         </div>
         <div class="inline nowrap">
-          <span>Lub wpisz kwotę ręcznie:</span>
+          <span>Kwota:</span>
           <input type="number" name="budget_amount" min="0" step="100" placeholder="np. 6500" />
           <span class="suffix">zł</span>
         </div>
