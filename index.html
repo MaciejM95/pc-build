@@ -31,7 +31,7 @@
     <form id="form-bazowy" class="card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera (Bazowy)" />
       <input type="hidden" name="submitted_at" id="submitted_at_b" />
-      <input type="hidden" name="form_version" value="v3.8-bazowy" />
+      <input type="hidden" name="form_version" value="v3.9-bazowy" />
       <input type="hidden" name="build_mode" value="Bazowy" />
 
       <!-- 1: Zastosowanie główne -->
@@ -49,18 +49,18 @@
           </label>
         </div>
 
-        <!-- Gry (podkategoria) -->
+        <!-- Gry (podkategoria) NO SQUARES -->
         <div class="sub cond fade" data-condition="Gry" hidden>
           <h3>Podkategoria: Gry</h3>
           <div class="grid">
-            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="E‑sport" /> <span>E‑sport</span></label>
-            <small class="tiny">E‑sport: CS, LoL, Valorant</small>
-            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="AAA" /> <span>AAA</span></label>
-            <small class="tiny">AAA: Cyberpunk, God of War, GTA</small>
-            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="VR" /> <span>VR</span></label>
-            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="SimRacing" /> <span>SimRacing</span></label>
-            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="Strategie" /> <span>Strategie</span></label>
-            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="MMO" /> <span>MMO</span></label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="E‑sport" /> E‑sport</label>
+            <span class="hint-line">E‑sport: CS, LoL, Valorant</span>
+            <label><input type="checkbox" name="gaming_kinds[]" value="AAA" /> AAA</label>
+            <span class="hint-line">AAA: Cyberpunk, God of War, GTA</span>
+            <label><input type="checkbox" name="gaming_kinds[]" value="VR" /> VR</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="SimRacing" /> SimRacing</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="Strategie" /> Strategie</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="MMO" /> MMO</label>
           </div>
         </div>
       </section>
