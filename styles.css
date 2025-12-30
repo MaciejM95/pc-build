@@ -49,11 +49,7 @@ button:hover,.button:hover{ filter:brightness(1.08) }
 .case-descriptions{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:8px }
 .case-option{ display:grid; grid-template-columns:1fr; gap:4px; padding:10px; border:1px solid var(--border); border-radius:10px; background:#0f1521 }
 .case-option span{ font-weight:600 }
-.case-layout{ display:grid; grid-template-columns: 2fr 1fr; gap: 16px; align-items:start }
-.case-info{ border:1px solid var(--border); border-radius:10px; background:#0f1521; padding:12px }
-.case-info h3{ margin:0 0 6px }
 .budget-grid label{ padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:#0f1521 }
 .disclaimer{ flex-basis:100%; color:var(--muted) }
 .mode{ display:block }
 .mode[hidden]{ display:none !important }
-@media (max-width:800px){ .case-layout{ grid-template-columns:1fr } }
