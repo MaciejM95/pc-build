@@ -24,13 +24,13 @@
       <label class="seg"><input type="radio" name="build_mode" value="Pro" /><span role="tab" aria-selected="false">Pro</span></label>
       <label class="seg"><input type="radio" name="build_mode" value="SimRig" /><span role="tab" aria-selected="false">SimRig</span></label>
     </div>
-    <p id="mode-note" class="tiny">Tryb <strong>Bazowy</strong> — prosty dobór bez szczegółowej konfiguracji podzespołów. (Pro/SimRig: placeholder, wkrótce rozszerzymy.)</p>
+    <p id="mode-note" class="tiny">Tryb <strong>Bazowy</strong> — prosty dobór bez szczegółowej konfiguracji podzespołów.</p>
   </section>
 
   <!-- Progress bar (sticky) -->
   <div class="progressbar" aria-label="Postęp"> 
     <div class="progress-fill"></div>
-    <div class="progress-text">Krok <span id="progress-step">1</span>/<span id="progress-total">9</span></div>
+    <div class="progress-text">Krok <span id="progress-step">1</span>/<span id="progress-total">8</span></div>
   </div>
 
   <main class="container">
@@ -43,7 +43,7 @@
     <form id="form-bazowy" class="card mode" data-mode="Bazowy" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera (Bazowy)" />
       <input type="hidden" name="submitted_at" id="submitted_at_b" />
-      <input type="hidden" name="form_version" value="v3.0-bazowy" />
+      <input type="hidden" name="form_version" value="v3.1-bazowy" />
       <input type="hidden" name="build_mode" value="Bazowy" />
 
       <!-- 1: Zastosowanie główne -->
@@ -124,7 +124,7 @@
                 <option>SSD (NVMe) + HDD</option>
                 <option>HDD (niezalecane)</option>
               </select>
-              <span class="hint-line">SSD (NVMe) — najszybszy; SSD+HDD — tania pojemność.</span>
+              <span class="hint-line">SSD (NVMe) — najszybszy. SSD+HDD — większa, tańsza pojemność na dane.</span>
             </label>
             <label>Rozmiar dysku systemowego:
               <select name="os_drive_size">
@@ -133,9 +133,9 @@
                 <option>1 TB</option>
                 <option>2 TB</option>
               </select>
-              <span class="hint-line">512 GB minimum; 1 TB wygodnie do gier/wideo.</span>
+              <span class="hint-line">Minimum to <strong>256 GB</strong>. 512 GB wygodniejsze; 1 TB zalecane przy grach/wideo.</span>
             </label>
-            <label>Rozmiar dysku danych (opcjonalnie):
+            <label>Rozmiar dysku danych (drugi dysk):
               <select name="data_drive_size">
                 <option value="">(brak / zostaw puste)</option>
                 <option>1 TB</option>
@@ -143,25 +143,15 @@
                 <option>4 TB</option>
                 <option>6 TB+</option>
               </select>
-              <span class="hint-line">Duże archiwa/footage → 4 TB+.</span>
+              <span class="hint-line">Drugi dysk na <strong>wszystkie dane poza systemem</strong>: gry, projekty, archiwa, materiał wideo.</span>
             </label>
           </div>
         </div>
       </section>
 
-      <!-- 4: System operacyjny -->
+      <!-- 4: Monitor (po usunięciu OS jest teraz #4) -->
       <section class="block" data-step="4">
-        <h2><span class="num">4</span> System operacyjny</h2>
-        <div class="grid">
-          <label><input type="radio" name="os" value="Windows" /> Windows</label>
-          <label><input type="radio" name="os" value="Linux" /> Linux</label>
-          <label><input type="radio" name="os" value="Nie wiem / do ustalenia" /> Nie wiem / do ustalenia</label>
-        </div>
-      </section>
-
-      <!-- 5: Monitor -->
-      <section class="block" data-step="5">
-        <h2><span class="num">5</span> Monitor — czy chcesz skonsultować?</h2>
+        <h2><span class="num">4</span> Monitor — czy chcesz skonsultować?</h2>
         <p class="tiny">Możesz zostawić puste — skonsultujemy to oddzielnie.</p>
         <div class="grid">
           <label><input type="radio" name="monitor_consult" value="Nie" /> Nie</label>
@@ -176,7 +166,7 @@
                 <option>2</option>
                 <option>3+</option>
               </select>
-              <span class="hint-line">Przy 3+ sprawdzimy wyjścia GPU (HDMI/DP/USB‑C).</span>
+              <span class="hint-line">3+ monitorów → sprawdzimy wyjścia wideo GPU (HDMI/DP/USB‑C).</span>
             </label>
             <label>Rodzaj:
               <select name="monitor_type">
@@ -207,7 +197,7 @@
                 <option>32"</option>
                 <option>34"+</option>
               </select>
-              <span class="hint-line">27–32″: uniwersalnie; 34″+ ultrawide — szeroka przestrzeń.</span>
+              <span class="hint-line">27–32″: uniwersalnie; 34″+ ultrawide — szeroka przestrzeń robocza.</span>
             </label>
             <label>Rozdzielczość:
               <select name="monitor_res">
@@ -231,9 +221,9 @@
         </div>
       </section>
 
-      <!-- 6: Części posiadane -->
-      <section class="block" data-step="6">
-        <h2><span class="num">6</span> Czy masz już jakieś części?</h2>
+      <!-- 5: Części posiadane -->
+      <section class="block" data-step="5">
+        <h2><span class="num">5</span> Czy masz już jakieś części?</h2>
         <div class="grid">
           <label><input type="radio" name="parts_have" value="Nie" /> Nie</label>
           <label class="inline-flex">
@@ -244,28 +234,24 @@
         </div>
       </section>
 
-      <!-- 7: Uwagi -->
-      <section class="block" data-step="7">
-        <h2><span class="num">7</span> Dodatkowe uwagi / oczekiwania</h2>
+      <!-- 6: Uwagi -->
+      <section class="block" data-step="6">
+        <h2><span class="num">6</span> Dodatkowe uwagi / oczekiwania</h2>
         <textarea name="notes" rows="4" placeholder="np. „ma być bardzo cichy”, „dużo RGB”, „pod 2–3 monitory”, „możliwa rozbudowa”, „chłodzenie wodne”"></textarea>
         <p class="tiny">(Możesz zostawić puste — dopytamy w odpowiedzi)</p>
       </section>
 
-      <!-- 8: Kontakt -->
-      <section class="block" data-step="8">
-        <h2><span class="num">8</span> Kontakt</h2>
+      <!-- 7: Kontakt -->
+      <section class="block" data-step="7">
+        <h2><span class="num">7</span> Kontakt</h2>
         <p class="tiny"><strong>Informacja o kontakcie jest niezbędna</strong> do przygotowania rekomendacji.</p>
-        <label class="inline">
-          E‑mail: <input type="email" name="contact_email" placeholder="twoj@mail.com" required />
-        </label>
-        <label class="inline">
-          Imię: <input type="text" name="contact_name" placeholder="Imię (opcjonalnie)" />
-        </label>
+        <label class="inline">E‑mail: <input type="email" name="contact_email" placeholder="twoj@mail.com" required /></label>
+        <label class="inline">Imię: <input type="text" name="contact_name" placeholder="Imię (opcjonalnie)" /></label>
       </section>
 
-      <!-- 9: Budżet -->
-      <section class="block" data-step="9">
-        <h2><span class="num">9</span> Budżet na komputer (bez monitora i peryferiów)</h2>
+      <!-- 8: Budżet -->
+      <section class="block" data-step="8">
+        <h2><span class="num">8</span> Budżet na komputer (bez monitora i peryferiów)</h2>
         <p class="tiny">Peryferia = klawiatura, mysz, słuchawki, głośniki.</p>
         <div class="grid budget-grid">
           <label><input type="radio" name="budget_range" value="Do 2000 zł" /> Do&nbsp;2000&nbsp;zł</label>
@@ -287,11 +273,11 @@
       </div>
     </form>
 
-    <!-- MODE: Pro -->
+    <!-- MODE: Pro (bez OS kroku) -->
     <form id="form-pro" class="card mode" data-mode="Pro" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate hidden>
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera (Pro)" />
       <input type="hidden" name="submitted_at" id="submitted_at_p" />
-      <input type="hidden" name="form_version" value="v3.0-pro" />
+      <input type="hidden" name="form_version" value="v3.1-pro" />
       <input type="hidden" name="build_mode" value="Pro" />
 
       <!-- 1: CPU -->
@@ -399,16 +385,18 @@
         </div>
       </section>
 
-      <!-- 4: Storage (szczegóły) -->
+      <!-- 4: Storage -->
       <section class="block" data-step="4">
         <h2><span class="num">4</span> Storage — szczegóły</h2>
         <div class="grid">
           <label>Dysk systemowy:
             <select name="pro_os_drive">
+              <option>SSD NVMe 256 GB</option>
               <option>SSD NVMe 512 GB</option>
               <option>SSD NVMe 1 TB</option>
               <option>SSD NVMe 2 TB</option>
             </select>
+            <span class="hint-line">Minimum <strong>256 GB</strong>; 512 GB wygodniejsze; 1 TB do gier/wideo.</span>
           </label>
           <label>Dysk roboczy/scratch:
             <select name="pro_scratch">
@@ -417,13 +405,15 @@
               <option>SSD NVMe 2 TB</option>
             </select>
           </label>
-          <label>Archiwum danych:
+          <label>Archiwum danych (drugi dysk):
             <select name="pro_archive">
               <option>Brak</option>
+              <option>HDD 2 TB</option>
               <option>HDD 4 TB</option>
               <option>HDD 8 TB</option>
               <option>NAS / zewnętrzny</option>
             </select>
+            <span class="hint-line">Drugi dysk na <strong>wszystkie dane poza systemem</strong> — gry, projekty, wideo, archiwa.</span>
           </label>
           <label>RAID:
             <select name="pro_raid">
@@ -511,11 +501,11 @@
         </div>
       </section>
 
-      <!-- 8: Case — airflow/silence -->
+      <!-- 8: Case — airflow/silence + Kontakt/Budżet -->
       <section class="block" data-step="8">
-        <h2><span class="num">8</span> Obudowa — styl pracy</h2>
+        <h2><span class="num">8</span> Obudowa / Kontakt / Budżet</h2>
         <div class="grid">
-          <label>Priorytet:
+          <label>Priorytet obudowy:
             <select name="case_priority">
               <option>Airflow (chłodne)</option>
               <option>Silence (ciche)</option>
@@ -526,27 +516,6 @@
             <select name="case_io">
               <option>Standard USB‑A</option>
               <option>USB‑C wymagane</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <!-- 9: Sieć + Kontakt + Budżet -->
-      <section class="block" data-step="9">
-        <h2><span class="num">9</span> Sieć / Kontakt / Budżet</h2>
-        <div class="grid">
-          <label>Ethernet:
-            <select name="net_eth">
-              <option>1G</option>
-              <option>2.5G</option>
-              <option>10G</option>
-            </select>
-          </label>
-          <label>Wi‑Fi:
-            <select name="net_wifi">
-              <option>Brak</option>
-              <option>Wi‑Fi 6</option>
-              <option>Wi‑Fi 6E</option>
             </select>
           </label>
         </div>
@@ -576,11 +545,11 @@
       </div>
     </form>
 
-    <!-- MODE: SimRig -->
+    <!-- MODE: SimRig (bez OS kroku) -->
     <form id="form-simrig" class="card mode" data-mode="SimRig" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate hidden>
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera (SimRig)" />
       <input type="hidden" name="submitted_at" id="submitted_at_s" />
-      <input type="hidden" name="form_version" value="v3.0-simrig" />
+      <input type="hidden" name="form_version" value="v3.1-simrig" />
       <input type="hidden" name="build_mode" value="SimRig" />
 
       <!-- 1: Symulatory / Tytuły -->
