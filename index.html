@@ -167,31 +167,12 @@
         </div>
       </section>
 
-      <!-- 2: CASE: Obudowa z grafiką (inline SVG dla pewności wyświetlania) -->
+      <!-- 2: CASE: Obudowa (realistyczna grafika obok siebie) -->
       <section class="block">
         <h2><span class="num">2</span> Obudowa — preferencje rozmiaru</h2>
-        <p class="tiny">Poniżej poglądowe rozmiary obudów. Wybierz preferowany typ lub zostaw bez znaczenia.</p>
-        <div class="case-illustration">
-          <svg width="100%" height="220" viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schemat rozmiarów obudów">
-            <style>
-              .box { fill:#182233; stroke:#2a3546; stroke-width:2; }
-              .label { fill:#a0adba; font-family: Arial, sans-serif; font-size:12px; }
-              .title { fill:#e6edf5; font-family: Arial, sans-serif; font-size:14px; font-weight:bold; }
-            </style>
-            <rect x="20" y="80" width="80" height="60" class="box" />
-            <text x="60" y="75" text-anchor="middle" class="title">Mini‑PC</text>
-            <text x="60" y="155" text-anchor="middle" class="label">SFF</text>
-            <rect x="130" y="70" width="100" height="80" class="box" />
-            <text x="180" y="65" text-anchor="middle" class="title">Mini‑ITX</text>
-            <rect x="260" y="60" width="120" height="100" class="box" />
-            <text x="320" y="55" text-anchor="middle" class="title">mATX</text>
-            <rect x="410" y="50" width="140" height="120" class="box" />
-            <text x="480" y="45" text-anchor="middle" class="title">ATX</text>
-            <rect x="570" y="40" width="50" height="140" class="box" />
-            <text x="595" y="35" text-anchor="middle" class="title">Full</text>
-            <text x="595" y="190" text-anchor="middle" class="title">Tower</text>
-            <text x="320" y="210" text-anchor="middle" class="label">Wizualizacja poglądowa — nie odzwierciedla dokładnych wymiarów.</text>
-          </svg>
+        <p class="tiny">Poglądowa grafika rozmiarów obudów (nie jest w skali 1:1):</p>
+        <div class="case-illustration realistic">
+          <img src="assets/cases-realistic.svg" alt="Realistyczna grafika rozmiarów obudów: Mini‑PC, Mini‑ITX, mATX, ATX, Full Tower" />
         </div>
         <div class="grid">
           <label><input type="radio" name="case_size" value="Mini‑PC (SFF)" /> Mini‑PC (SFF)</label>
@@ -300,14 +281,15 @@
         </div>
       </section>
 
-      <!-- 5: CZĘŚCI posiadane -->
+      <!-- 5: CZĘŚCI posiadane (poprawiony layout dla "Tak, jakie") -->
       <section class="block">
         <h2><span class="num">5</span> Czy masz już jakieś części?</h2>
         <div class="grid">
           <label><input type="radio" name="parts_have" value="Nie" /> Nie</label>
-          <label class="inline">
-            <input type="radio" name="parts_have" value="Tak" /> Tak, jakie:
-            <input type="text" name="parts_list" placeholder="np. dysk SSD, obudowa…" />
+          <label class="inline-flex">
+            <input type="radio" name="parts_have" value="Tak" />
+            <span>Tak, jakie:</span>
+            <input class="flex-field" type="text" name="parts_list" placeholder="np. dysk SSD, obudowa…" />
           </label>
         </div>
       </section>
@@ -349,16 +331,16 @@
           <label><input type="radio" name="budget_range" value="5000–10000 zł" /> 5000–10000&nbsp;zł</label>
           <label><input type="radio" name="budget_range" value="10000+ zł" /> 10000+&nbsp;zł</label>
         </div>
-        <label class="inline manual-budget">
-          Lub wpisz kwotę ręcznie:
+        <div class="inline nowrap">
+          <span>Lub wpisz kwotę ręcznie:</span>
           <input type="number" name="budget_amount" min="0" step="100" placeholder="np. 6500" />
           <span class="suffix">zł</span>
-        </label>
+        </div>
       </section>
 
       <!-- Pola meta do CSV -->
       <input type="hidden" name="submitted_at" id="submitted_at" />
-      <input type="hidden" name="form_version" value="v2.1" />
+      <input type="hidden" name="form_version" value="v2.2" />
 
       <div class="actions">
         <button type="submit" id="submit-btn">Wyślij</button>
