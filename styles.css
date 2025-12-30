@@ -20,7 +20,7 @@ html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-fa
 .progress-text{ color:var(--muted); font-size:.9rem; margin-left:10px }
 .container{ max-width:980px; margin:0 auto; padding:24px }
 .hero{ margin-bottom:12px }
-.hero h1{ font-size:1.9rem; margin:0 0 6px }
+.hero h1{ font-size:1.7rem; margin:0 0 6px }
 .subtitle{ color:var(--muted); margin:0 0 16px }
 .card{ background:var(--card); border:1px solid var(--border); border-radius:14px; padding:18px; margin:18px 0 }
 .block{ margin:16px 0 }
@@ -37,8 +37,10 @@ input[type="text"],input[type="number"],input[type="email"],textarea,select{ wid
 input[type="email"]:required{ border-color:#5aa8ff }
 textarea{ resize:vertical }
 .sub{ margin-top:10px; border:1px solid var(--border); border-left:3px solid var(--accent); padding:12px; border-radius:10px; background:var(--sub-bg) }
+.sub.fade{ opacity:0; transform: translateY(4px); transition: opacity .18s ease, transform .18s ease; }
+.sub.fade.show{ opacity:1; transform: translateY(0); }
 .sub h3{ margin:0 0 8px; color:var(--text) }
-.num{ display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0b0f14; font-weight:800; margin-right:8px }
+.num{ display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0b0f14; font-weight:800; margin-right:8px; font-size:.95rem }
 .actions{ display:flex; align-items:center; gap:16px; flex-wrap:wrap }
 .button,button{ background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0b0f14; border:none; border-radius:10px; padding:10px 16px; font-weight:700; cursor:pointer; text-decoration:none }
 button:hover,.button:hover{ filter:brightness(1.08) }
@@ -46,10 +48,14 @@ button:hover,.button:hover{ filter:brightness(1.08) }
 .footer{ margin:24px 0 0; text-align:center }
 .suffix{ color:var(--muted) }
 #status{ min-height:1.2em }
-.case-descriptions{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:8px }
-.case-option{ display:grid; grid-template-columns:1fr; gap:4px; padding:10px; border:1px solid var(--border); border-radius:10px; background:#0f1521 }
-.case-option span{ font-weight:600 }
-.budget-grid label{ padding:8px 10px; border:1px solid var(--border); border-radius:10px; background:#0f1521 }
-.disclaimer{ flex-basis:100%; color:var(--muted) }
-.mode{ display:block }
-.mode[hidden]{ display:none !important }
+
+/* Compact case selection */
+.case-layout.compact{ display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start }
+.case-pills{ display:flex; flex-wrap:wrap; gap:8px }
+.pill{ display:inline-flex; align-items:center; border:1px solid var(--border); border-radius:999px; padding:6px 10px; background:#0f1521; }
+.pill input{ display:none }
+.pill span{ font-size:.92rem; color:var(--text) }
+.pill input:checked + span{ color:#0b0f14; font-weight:700; background:linear-gradient(135deg,var(--accent),var(--accent-2)); padding:6px 10px; border-radius:999px }
+.case-info{ border:1px solid var(--border); border-radius:10px; background:#0f1521; padding:12px }
+.case-info h3{ margin:0 0 6px }
+@media (max-width:780px){ .case-layout.compact{ grid-template-columns:1fr } }

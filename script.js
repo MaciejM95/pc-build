@@ -17,53 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     Object.keys(forms).forEach(k=>{ const f=forms[k]; if(!f) return; f.hidden = (k!==val); });
     if(modeNote) modeNote.innerHTML = `Tryb <strong>${val}</strong> — ${modeTexts[val]}`;
     setupProgress();
-    bindToggles();
+    bindForVisibleForm();
   }
   modeRadios.forEach(r=>r.addEventListener('change',e=>switchMode(e.target.value)));
   switchMode(Array.from(modeRadios).find(r=>r.checked)?.value || 'Bazowy');
 
-  // usage -> conditional (Bazowy)
-  function bindUsageConditions(){
-    const form = forms.Bazowy; if(!form) return;
-    const usage = form.querySelectorAll('input[name="usage[]"]');
-    const blocks = form.querySelectorAll('.cond');
-    function update(){
-      const selected = new Set(Array.from(usage).filter(c=>c.checked).map(c=>c.value));
-      blocks.forEach(b=>{ const cond=b.getAttribute('data-condition'); b.hidden = !selected.has(cond); });
-    }
-    usage.forEach(cb=>cb.addEventListener('change',update));
-    update();
-  }
-
-  // generic toggles per visible form
-  function bindToggles(){
-    // Bazowy: storage
-    const fB = forms.Bazowy; if(fB){
-      const osRadios = fB.querySelectorAll('input[name="os_drive_pref_b"]');
-      const storage = fB.querySelector('#storage-details-b');
-      function updStorage(){ const val = Array.from(osRadios).find(r=>r.checked)?.value; if(storage) storage.hidden = (val!=='Tak'); }
-      osRadios.forEach(r=>r.addEventListener('change',updStorage)); updStorage();
-      // Monitor
-      const monRadios = fB.querySelectorAll('input[name="monitor_consult_b"]');
-      const monDetails = fB.querySelector('#monitor-details-b');
-      function updMonitor(){ const val = Array.from(monRadios).find(r=>r.checked)?.value; if(monDetails) monDetails.hidden = (val!=='Tak'); }
-      monRadios.forEach(r=>r.addEventListener('change',updMonitor)); updMonitor();
-      // Case info
-      const caseInfoText = document.getElementById('case-info-text');
-      const caseRadios = fB.querySelectorAll('input[name="case_size"]');
-      const caseMap = {
-        'Mini‑ITX (Mini)': 'Najmniejsza obudowa: 1 slot GPU, ograniczone chłodzenie — najlepsza do kompaktów.',
-        'mATX (Mały)': 'Mały, ale elastyczny: więcej slotów niż ITX, sensowny airflow, nadal kompakt.',
-        'ATX (Standardowy)': 'Najbardziej uniwersalny: pełna kompatybilność, rozbudowa, dobre chłodzenie.',
-        'Full Tower (Duży)': 'Najwięcej miejsca: świetny airflow, LC, wiele dysków, duże GPU; idealny do rozbudowy/ciszy.'
-      };
-      function updCase(){ const v = Array.from(caseRadios).find(r=>r.checked)?.value; if(caseInfoText) caseInfoText.textContent = caseMap[v] || 'Wybierz rozmiar po lewej — tutaj pokażemy opis.'; }
-      caseRadios.forEach(r=>r.addEventListener('change',updCase)); updCase();
-    }
-    bindUsageConditions();
-  }
-
-  // progress bar for visible form
+  // Progress bar per visible form
   let observer; function setupProgress(){
     const stepEl=document.getElementById('progress-step'); const totalEl=document.getElementById('progress-total'); const fillEl=document.querySelector('.progress-fill');
     const visForm = Object.values(forms).find(f=>f && !f.hidden); if(!visForm) return;
@@ -78,7 +37,70 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(sec=>observer.observe(sec)); setProg(1);
   }
 
-  // submit handlers
+  // Generic data-toggle handler + visual feedback (Alt B)
+  function bindDataToggles(root){
+    const toggles = root.querySelectorAll('[data-toggle]');
+    toggles.forEach(el => {
+      const targetSel = el.getAttribute('data-target');
+      const showWhen = el.getAttribute('data-show-when');
+      const target = root.querySelector(targetSel);
+      if(!target) return;
+      function update(){
+        const type = el.getAttribute('data-toggle');
+        let shouldShow = false;
+        if(type === 'radio'){
+          const groupName = el.getAttribute('name');
+          const checked = root.querySelector(`input[name="${groupName}"]:checked`);
+          shouldShow = (checked && checked.value === showWhen);
+        } else if(type === 'checkbox'){
+          shouldShow = el.checked && el.value === showWhen;
+        }
+        target.hidden = !shouldShow;
+        target.classList.toggle('show', shouldShow); // fade-in class
+        if(shouldShow){ target.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+      }
+      el.addEventListener('change', update);
+      // Initialize once per group (for radios, use first element)
+      update();
+    });
+  }
+
+  // Bind usage conditional (Bazowy)
+  function bindUsageConditions(root){
+    const usage = root.querySelectorAll('input[name="usage[]"]');
+    const blocks = root.querySelectorAll('.cond');
+    function update(){
+      const selected = new Set(Array.from(usage).filter(c=>c.checked).map(c=>c.value));
+      blocks.forEach(b=>{ const cond=b.getAttribute('data-condition'); b.hidden = !selected.has(cond); b.classList.toggle('show', selected.has(cond)); });
+    }
+    usage.forEach(cb=>cb.addEventListener('change',update));
+    update();
+  }
+
+  // Case info binding (compact pills)
+  function bindCaseInfo(root){
+    const caseInfoText = document.getElementById('case-info-text');
+    const caseRadios = root.querySelectorAll('input[name="case_size"]');
+    const caseMap = {
+      'Mini‑ITX (Mini)': 'Najmniejsza obudowa: 1 slot GPU, ograniczone chłodzenie — najlepsza do kompaktów.',
+      'mATX (Mały)': 'Mały, ale elastyczny: więcej slotów niż ITX, sensowny airflow, nadal kompakt.',
+      'ATX (Standardowy)': 'Najbardziej uniwersalny: pełna kompatybilność, rozbudowa, dobre chłodzenie.',
+      'Full Tower (Duży)': 'Najwięcej miejsca: świetny airflow, LC, wiele dysków, duże GPU; idealny do rozbudowy/ciszy.'
+    };
+    function updCase(){ const v = Array.from(caseRadios).find(r=>r.checked)?.value; if(caseInfoText) caseInfoText.textContent = caseMap[v] || 'Wybierz rozmiar po lewej — tutaj pokażemy opis.'; }
+    caseRadios.forEach(r=>r.addEventListener('change',updCase));
+    updCase();
+  }
+
+  // Bind everything for current visible form
+  function bindForVisibleForm(){
+    const form = Object.values(forms).find(f=>f && !f.hidden); if(!form) return;
+    bindDataToggles(form);
+    bindUsageConditions(form);
+    bindCaseInfo(form);
+  }
+
+  // Submit handlers (unchanged)
   function bindSubmit(form, btnId){ if(!form) return; const status=document.getElementById('status'); const btn=form.querySelector('#'+btnId); const thanks=document.getElementById('thanks');
     async function onSubmit(ev){ ev.preventDefault(); if(status) status.textContent=''; if(btn) btn.disabled=true;
       const fd=new FormData(form);
