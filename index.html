@@ -1,399 +1,258 @@
+
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <title>Bazowy – Dobór komputera stacjonarnego | PC Advisor</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    /* ========== Reset + zmienne ========== */
-    :root{
-      --bg: #0f1115;
-      --panel: #161a22;
-      --panel-2: #1c2230;
-      --text: #e7eaf0;
-      --muted: #b7c0d1;
-      --accent: #5aa2ff;
-      --accent-2: #8dd8ff;
-      --ring: rgba(90,162,255,.35);
-      --danger: #ff4d6d;
-      --success: #30c48d;
-      --radius: 10px;
-      --space-1: .25rem;
-      --space-2: .5rem;
-      --space-3: .75rem;
-      --space-4: 1rem;
-      --space-5: 1.5rem;
-      --font-1: 12px;      /* kompakt */
-      --font-2: 14px;      /* normal */
-      --font-3: 16px;      /* tytuły sekcji */
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: linear-gradient(180deg, var(--bg), #0b0d12 40%, #0f1218 100%);
-      color: var(--text);
-    }
-    a{color:var(--accent)}
-    .container{
-      max-width: 960px;
-      margin: 0 auto;
-      padding: var(--space-5) var(--space-4);
-    }
-    header, footer{
-      margin-bottom: var(--space-5);
-    }
-    h1{font-size: 22px; margin: 0 0 var(--space-3)}
-    h2{font-size: 18px; margin: var(--space-4) 0 var(--space-2)}
-    h3{font-size: var(--font-3); margin: var(--space-3) 0 var(--space-2); color: var(--accent)}
-    p{color: var(--muted); margin: 0 0 var(--space-3)}
-
-    /* ========== Pigułki ========== */
-    .pill-group{
-      display: flex; flex-wrap: wrap; gap: var(--space-2);
-      align-items: flex-start;
-      margin: var(--space-3) 0 var(--space-2);
-    }
-    /* opcjonalnie: stałe kolumny */
-    .pill-group--cols{ 
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: var(--space-2);
-    }
-    .pill{
-      --pad-y: .45rem;
-      --pad-x: .65rem;
-      --font: var(--font-2);
-      display:inline-flex; align-items:center; gap:.4rem;
-      padding: var(--pad-y) var(--pad-x);
-      border-radius: 999px; /* „pill” */
-      border: 1px solid transparent;
-      background: var(--panel);
-      color: var(--text);
-      font-size: var(--font);
-      line-height: 1.1;
-      cursor: pointer;
-      user-select: none;
-      transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .02s ease;
-    }
-    .pill:hover{ background: var(--panel-2); border-color: rgba(255,255,255,.06) }
-    .pill:active{ transform: translateY(1px) }
-
-    /* kompakt dla podkategorii */
-    .pill--compact{
-      --pad-y: .35rem;
-      --pad-x: .55rem;
-      --font: var(--font-1);
-      opacity: .95;
-    }
-
-    /* stan zaznaczenia (radio/checkbox ukryte) */
-    .pill input{
-      position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); clip-path: inset(50%); white-space:nowrap; border:0; padding:0; margin:0;
-    }
-    .pill[data-type="radio"][data-checked="true"],
-    .pill[data-type="checkbox"][data-checked="true"]{
-      background: color-mix(in oklab, var(--panel), var(--accent) 18%);
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--ring);
-    }
-
-    /* mini opisy w blokach */
-    .hint{
-      font-size: 12px; color: var(--muted);
-      margin-top: var(--space-2);
-    }
-
-    /* karty sekcji */
-    .card{
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius);
-      padding: var(--space-4);
-      margin: var(--space-4) 0;
-    }
-
-    /* formularz kontakt/budżet */
-    .form-row{
-      display:flex; gap: var(--space-3); flex-wrap:wrap; margin: var(--space-2) 0;
-    }
-    .input{
-      flex:1 1 240px;
-      background: var(--panel);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 8px;
-      color: var(--text);
-      padding: .6rem .7rem;
-      font-size: var(--font-2);
-    }
-    .btn-primary{
-      display:inline-block; padding:.6rem 1rem; border-radius: 8px;
-      background: var(--accent); color:#0b1118; border: 1px solid rgba(255,255,255,.15);
-      font-weight: 600; cursor:pointer;
-    }
-    .nav{
-      display:flex; gap:.75rem; flex-wrap:wrap;
-    }
-    .nav a{
-      text-decoration:none; color:var(--text);
-      padding:.4rem .7rem; border-radius: 8px; background: var(--panel);
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bazowy – Dobór komputera stacjonarnego</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <header>
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="blog.html">Blog</a>
-        <a href="kontakt.html">Kontakt</a>
-      </nav>
-      <h1>Bazowy – Dobór komputera stacjonarnego</h1>
-      <p>Krok 1/8 • Zaznacz lub uzupełnij — wystarczy kilka minut.</p>
-    </header>
+  <header class="topbar">
+    <div class="brand">PC Advisor</div>
+    <nav class="nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </header>
 
-    <!-- 1 Zastosowanie główne -->
-    <section class="card">
-      <h2>1. Zastosowanie główne</h2>
-      <div class="pill-group">
-        <!-- radio: tylko jedno główne zastosowanie -->
-        <label class="pill" data-type="radio">
-          <input type="radio" name="use-main" value="office">
-          Praca biurowa / nauka / internet
-        </label>
-        <label class="pill" data-type="radio">
-          <input type="radio" name="use-main" value="gaming"> Gry
-        </label>
-        <label class="pill" data-type="radio">
-          <input type="radio" name="use-main" value="photo"> Grafika / obróbka zdjęć
-        </label>
-        <label class="pill" data-type="radio">
-          <input type="radio" name="use-main" value="video"> Montaż wideo
-        </label>
-        <label class="pill" data-type="radio">
-          <input type="radio" name="use-main" value="dev"> Programowanie
-        </label>
-        <label class="pill" data-type="radio">
-          <input type="radio" name="use-main" value="other"> Inne
-        </label>
-      </div>
-
-      <!-- Podkategoria: Gry — kompaktowe pigułki -->
-      <h3>Podkategoria: Gry</h3>
-      <div class="pill-group pill-group--cols">
-        <!-- checkbox: można zaznaczyć kilka -->
-        <label class="pill pill--compact" data-type="checkbox">
-          <input type="checkbox" name="gaming-sub" value="esports"> E‑sport
-        </label>
-        <label class="pill pill--compact" data-type="checkbox">
-          <input type="checkbox" name="gaming-sub" value="esports-top"> E‑sport: CS, LoL, Valorant
-        </label>
-        <label class="pill pill--compact" data-type="checkbox">
-          <input type="checkbox" name="gaming-sub" value="aaa"> AAA
-        </label>
-        <label class="pill pill--compact" data-type="checkbox">
-          <input type="checkbox" name="gaming-sub" value="aaa-top"> AAA: Cyberpunk, God of War, GTA
-        </label>
-        <label class="pill pill--compact" data-type="checkbox">
-          <input type="checkbox" name="gaming-sub" value="vr"> VR
-        </label>
-        <label class="pill pill--compact" data-type="checkbox">
-          <input type="checkbox" name="gaming-sub" value="sim"> SimRacing
-        </label>
-        <label class="pill pill--compact" data-type="checkbox">
-          <input type="checkbox" name="gaming-sub" value="strategy"> Strategie
-        </label>
-        <label class="pill pill--compact" data-type="checkbox">
-          <input type="checkbox" name="gaming-sub" value="mmo"> MMO
-        </label>
-      </div>
-    </section>
-
-    <!-- 2 Obudowa -->
-    <section class="card">
-      <h2>2. Obudowa — preferencje rozmiaru</h2>
-      <p class="hint">Jeśli wybierzesz „Bez znaczenia”, dobierzemy rozmiar do Twoich potrzeb.</p>
-      <div class="pill-group">
-        <label class="pill" data-type="radio"><input type="radio" name="case-size" value="mini-itx"> Mini‑ITX (Mini)</label>
-        <label class="pill" data-type="radio"><input type="radio" name="case-size" value="matx"> mATX (Mały)</label>
-        <label class="pill" data-type="radio"><input type="radio" name="case-size" value="atx"> ATX (Standardowy)</label>
-        <label class="pill" data-type="radio"><input type="radio" name="case-size" value="full"> Full Tower (Duży)</label>
-        <label class="pill" data-type="radio"><input type="radio" name="case-size" value="any"> Bez znaczenia</label>
-      </div>
-      <h3>Opis rozmiaru</h3>
-      <p class="hint">Wybierz rozmiar po lewej — tutaj pokażemy krótki opis praktycznych zastosowań.</p>
-    </section>
-
-    <!-- 3 Dysk -->
-    <section class="card">
-      <h2>3. Dysk — preferencje dla dysku systemowego</h2>
-      <p class="hint">Jeśli wybierzesz „Nie”, skonsultujemy to oddzielnie po kontakcie.</p>
-      <div class="pill-group">
-        <label class="pill" data-type="radio"><input type="radio" name="sys-disk" value="no"> Nie</label>
-        <label class="pill" data-type="radio"><input type="radio" name="sys-disk" value="yes"> Tak</label>
-      </div>
-
-      <h3>Konfiguracja i rozmiary</h3>
-      <div class="pill-group pill-group--cols">
-        <!-- konfiguracja -->
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="disk-config" value="nvme"> SSD (NVMe)</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="disk-config" value="nvme-hdd"> SSD (NVMe) + HDD</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="disk-config" value="hdd"> HDD (niezalecane)</label>
-        <!-- rozmiar systemowego -->
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="sys-size" value="256"> 256 GB</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="sys-size" value="512"> 512 GB</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="sys-size" value="1tb"> 1 TB</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="sys-size" value="2tb"> 2 TB</label>
-        <!-- drugi dysk -->
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="data-size" value="none">(brak)</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="data-size" value="1tb"> 1 TB</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="data-size" value="2tb"> 2 TB</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="data-size" value="4tb"> 4 TB</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="data-size" value="6tbplus"> 6 TB+</label>
-      </div>
-      <div class="hint">
-        SSD (NVMe) — najszybszy. SSD+HDD — większa, tańsza pojemność na dane.<br>
-        Minimum to 256 GB. 512 GB wygodniejsze; 1 TB zalecane przy grach/wideo.<br>
-        Drugi dysk na dane: gry, projekty, archiwa, materiał wideo.
-      </div>
-    </section>
-
-    <!-- 4 Monitor -->
-    <section class="card">
-      <h2>4. Monitor — czy chcesz skonsultować?</h2>
-      <p class="hint">Możesz zostawić puste — skonsultujemy to oddzielnie.</p>
-      <div class="pill-group">
-        <label class="pill" data-type="radio"><input type="radio" name="monitor-consult" value="no"> Nie</label>
-        <label class="pill" data-type="radio"><input type="radio" name="monitor-consult" value="yes"> Tak</label>
-      </div>
-
-      <h3>Parametry monitora</h3>
-      <!-- ilość -->
-      <div class="pill-group pill-group--cols">
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="monitors" value="1"> 1</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="monitors" value="2"> 2</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="monitors" value="3plus"> 3+</label>
-        <span class="hint" style="grid-column:1/-1">3+ monitorów → sprawdzimy wyjścia wideo GPU (HDMI/DP/USB‑C).</span>
-      </div>
-      <!-- rodzaj -->
-      <div class="pill-group pill-group--cols">
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="monitor-kind" value="office"> Biuro/uniwersalny</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="monitor-kind" value="gaming"> Gaming</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="monitor-kind" value="pro"> Pro grafika/video</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="monitor-kind" value="ultrawide"> Ultrawide</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="monitor-kind" value="curved"> Zakrzywiony</label>
-      </div>
-      <!-- odświeżanie -->
-      <div class="pill-group pill-group--cols">
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="hz" value="60"> 60 Hz</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="hz" value="75"> 75 Hz</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="hz" value="100"> 100 Hz</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="hz" value="120"> 120 Hz</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="hz" value="144"> 144 Hz</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="hz" value="165"> 165 Hz</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="hz" value="240plus"> 240 Hz+</label>
-      </div>
-      <!-- rozmiar -->
-      <div class="pill-group pill-group--cols">
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="size" value="24"> 24"</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="size" value="27"> 27"</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="size" value="32"> 32"</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="size" value="34plus"> 34"+</label>
-      </div>
-      <!-- rozdzielczość -->
-      <div class="pill-group pill-group--cols">
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="res" value="fhd"> Full HD</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="res" value="1440p"> 1440p</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="res" value="4k"> 4K</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="res" value="uwqhd"> UWQHD</label>
-      </div>
-      <!-- matryca -->
-      <div class="pill-group pill-group--cols">
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="panel" value="ips"> IPS</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="panel" value="va"> VA</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="panel" value="tn"> TN</label>
-        <label class="pill pill--compact" data-type="radio"><input type="radio" name="panel" value="oled"> OLED</label>
-      </div>
-
-      <div class="hint">
-        Gaming → wysoka częstotliwość; Pro grafika → lepsze kolory/kalibracja.<br>
-        144 Hz+ — płynne granie; 60–75 Hz — biuro/praca.<br>
-        27–32″: uniwersalnie; 34″+ ultrawide — szeroka przestrzeń robocza.<br>
-        1440p — sweet spot do gier; 4K — szczegóły, większe wymagania GPU.<br>
-        IPS: kolory; VA: kontrast; TN: szybki budżet; OLED: czerń.
-      </div>
-    </section>
-
-    <!-- 5 Części -->
-    <section class="card">
-      <h2>5. Czy masz już jakieś części?</h2>
-      <div class="pill-group">
-        <label class="pill" data-type="radio"><input type="radio" name="has-parts" value="no"> Nie</label>
-        <label class="pill" data-type="radio"><input type="radio" name="has-parts" value="yes"> Tak, jakie:</label>
-      </div>
-      <div class="form-row">
-        <input class="input" type="text" name="parts-list" placeholder="np. GPU, RAM, dysk…">
-      </div>
-    </section>
-
-    <!-- 7 Kontakt -->
-    <section class="card">
-      <h2>7. Kontakt</h2>
-      <p class="hint">Informacja o kontakcie jest niezbędna do przygotowania rekomendacji.</p>
-      <div class="form-row">
-        <input class="input" type="email" name="email" placeholder="E‑mail">
-        <input class="input" type="text" name="name" placeholder="Imię">
-      </div>
-    </section>
-
-    <!-- 8 Budżet -->
-    <section class="card">
-      <h2>8. Budżet na komputer (bez monitora i peryferiów)</h2>
-      <p class="hint">Peryferia = klawiatura, mysz, słuchawki, głośniki.</p>
-      <div class="pill-group">
-        <label class="pill" data-type="radio"><input type="radio" name="budget" value="2000"> Do 2000 zł</label>
-        <label class="pill" data-type="radio"><input type="radio" name="budget" value="2000-5000"> 2000–5000 zł</label>
-        <label class="pill" data-type="radio"><input type="radio" name="budget" value="5000-10000"> 5000–10000 zł</label>
-        <label class="pill" data-type="radio"><input type="radio" name="budget" value="10000plus"> 10000+ zł</label>
-      </div>
-      <div class="form-row">
-        <input class="input" type="number" name="budget-exact" placeholder="Kwota: zł" min="0" step="100">
-      </div>
-      <button class="btn-primary">Wyślij</button>
-      <p class="hint">Te wybory nie są ostateczne — potraktuj je jako wstępny pogląd Twoich potrzeb. Skonsultuję z Tobą szczegóły osobno przed rekomendacją.</p>
-      <p class="hint">Dziękuję! Odpowiem w ciągu jednego dnia. Jeśli nie widzisz maila, sprawdź folder „Spam”.</p>
-    </section>
-
-    <footer>
-      <a href="index.html">Wróć do strony głównej</a>
-      <p class="hint">Dbamy o prywatność — Twoje odpowiedzi służą jedynie do rekomendacji zestawu. Nie sprzedajemy danych. Możesz poprosić o usunięcie odpowiedzi.</p>
-    </footer>
+  <div class="progressbar" aria-label="Postęp"> 
+    <div class="progress-fill"></div>
+    <div class="progress-text">Krok <span id="progress-step">1</span>/<span id="progress-total">8</span></div>
   </div>
 
-  <!-- mały skrypt do wizualnego „checked” bez frameworków -->
-  <script>
-    document.addEventListener('click', (e)=>{
-      const label = e.target.closest('.pill');
-      if(!label) return;
-      const input = label.querySelector('input');
-      if(!input) return;
-      if(input.type === 'radio'){
-        // odznacz w grupie (name)
-        document.querySelectorAll(`input[type="radio"][name="${input.name}"]`).forEach(r=>{
-          const l = r.closest('.pill');
-          if(l) l.dataset.checked = "false";
-        });
-        input.checked = true;
-        label.dataset.checked = "true";
-      }else if(input.type === 'checkbox'){
-        input.checked = !input.checked;
-        label.dataset.checked = input.checked ? "true" : "false";
-      }
-    });
-    // inicjalizacja stanu na starcie
-    document.querySelectorAll('.pill input').forEach(i=>{
-      const l = i.closest('.pill'); if(l){ l.dataset.type = i.type; l.dataset.checked = i.checked ? "true":"false"; }
-    });
-  </script>
+  <main class="container">
+    <section class="hero">
+      <h1>Kwestionariusz — tryb <strong>Bazowy</strong></h1>
+      <p class="subtitle">Zaznacz lub uzupełnij — wystarczy kilka minut.</p>
+    </section>
+
+    <form id="form-bazowy" class="card" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera (Bazowy)" />
+      <input type="hidden" name="submitted_at" id="submitted_at_b" />
+      <input type="hidden" name="form_version" value="v3.7-bazowy" />
+      <input type="hidden" name="build_mode" value="Bazowy" />
+
+      <!-- 1: Zastosowanie główne -->
+      <section class="block" data-step="1">
+        <h2><span class="num">1</span> Zastosowanie główne</h2>
+        <div class="grid">
+          <label class="opt-square"><input type="checkbox" name="usage[]" value="Praca biurowa / nauka / internet" /> <span class="icon">💼</span><span>Praca biurowa / nauka / internet</span></label>
+          <label class="opt-square"><input type="checkbox" name="usage[]" value="Gry" /> <span class="icon">🎮</span><span>Gry</span></label>
+          <label class="opt-square"><input type="checkbox" name="usage[]" value="Grafika / obróbka zdjęć" /> <span class="icon">🖌️</span><span>Grafika / obróbka zdjęć</span></label>
+          <label class="opt-square"><input type="checkbox" name="usage[]" value="Montaż wideo" /> <span class="icon">🎬</span><span>Montaż wideo</span></label>
+          <label class="opt-square"><input type="checkbox" name="usage[]" value="Programowanie" /> <span class="icon">💻</span><span>Programowanie</span></label>
+          <label class="inline-stack">
+            <span class="opt-square mini"><input type="checkbox" name="usage[]" value="Inne" /> <span class="icon">➕</span><span>Inne</span></span>
+            <input type="text" name="usage_other" placeholder="Doprecyzuj (opcjonalnie)" />
+          </label>
+        </div>
+
+        <!-- Gry (podkategoria) -->
+        <div class="sub cond fade" data-condition="Gry" hidden>
+          <h3>Podkategoria: Gry</h3>
+          <div class="grid">
+            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="E‑sport" /> <span class="icon">🏆</span><span>E‑sport</span></label>
+            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="AAA" /> <span class="icon">🔥</span><span>AAA</span></label>
+            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="VR" /> <span class="icon">🕶️</span><span>VR</span></label>
+            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="SimRacing" /> <span class="icon">🏎️</span><span>SimRacing</span></label>
+            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="Strategie" /> <span class="icon">🧠</span><span>Strategie</span></label>
+            <label class="opt-square"><input type="checkbox" name="gaming_kinds[]" value="MMO" /> <span class="icon">👥</span><span>MMO</span></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2: Obudowa (kompaktowo + opis z prawej) -->
+      <section class="block" data-step="2">
+        <h2><span class="num">2</span> Obudowa — preferencje rozmiaru <span class="hint">(jeśli wybierzesz „Bez znaczenia”, dobierzemy rozmiar do Twoich potrzeb)</span></h2>
+        <div class="case-layout compact">
+          <div class="case-pills" role="radiogroup" aria-label="Rozmiar obudowy">
+            <label class="pill"><input type="radio" name="case_size" value="Mini‑ITX (Mini)" /><span>Mini‑ITX (Mini)</span></label>
+            <label class="pill"><input type="radio" name="case_size" value="mATX (Mały)" /><span>mATX (Mały)</span></label>
+            <label class="pill"><input type="radio" name="case_size" value="ATX (Standardowy)" /><span>ATX (Standardowy)</span></label>
+            <label class="pill"><input type="radio" name="case_size" value="Full Tower (Duży)" /><span>Full Tower (Duży)</span></label>
+            <label class="pill"><input type="radio" name="case_size" value="Bez znaczenia" /><span>Bez znaczenia</span></label>
+          </div>
+          <aside class="case-info" id="case-info">
+            <h3>Opis rozmiaru</h3>
+            <p class="tiny" id="case-info-text">Wybierz rozmiar po lewej — tutaj pokażemy krótki opis praktycznych zastosowań.</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- 3: Dysk -->
+      <section class="block" data-step="3">
+        <h2><span class="num">3</span> Dysk — preferencje dla dysku systemowego</h2>
+        <p class="tiny">Jeśli wybierzesz „Nie”, <strong>skonsultujemy to oddzielnie</strong> po kontakcie.</p>
+        <div class="grid">
+          <label class="opt-square"><input type="radio" name="os_drive_pref_b" value="Nie" data-toggle="radio" data-show-when="Tak" data-target="#storage-details-b" /> <span class="icon">❌</span><span>Nie</span></label>
+          <label class="opt-square"><input type="radio" name="os_drive_pref_b" value="Tak" data-toggle="radio" data-show-when="Tak" data-target="#storage-details-b" /> <span class="icon">✅</span><span>Tak</span></label>
+        </div>
+        <div class="sub fade" id="storage-details-b" hidden>
+          <h3>Konfiguracja i rozmiary</h3>
+          <div class="grid">
+            <label class="opt-square"><span class="icon">⚙️</span><span>Konfiguracja dysków</span>
+              <select name="storage_config">
+                <option>SSD (NVMe)</option>
+                <option>SSD (NVMe) + HDD</option>
+                <option>HDD (niezalecane)</option>
+              </select>
+              <span class="hint-line">SSD (NVMe) — najszybszy. SSD+HDD — większa, tańsza pojemność na dane.</span>
+            </label>
+            <label class="opt-square"><span class="icon">🧠</span><span>Rozmiar dysku systemowego</span>
+              <select name="os_drive_size">
+                <option>256 GB</option>
+                <option>512 GB</option>
+                <option>1 TB</option>
+                <option>2 TB</option>
+              </select>
+              <span class="hint-line">Minimum to <strong>256 GB</strong>. 512 GB wygodniejsze; 1 TB zalecane przy grach/wideo.</span>
+            </label>
+            <label class="opt-square"><span class="icon">📦</span><span>Rozmiar dysku danych (drugi dysk)</span>
+              <select name="data_drive_size">
+                <option value="">(brak / zostaw puste)</option>
+                <option>1 TB</option>
+                <option>2 TB</option>
+                <option>4 TB</option>
+                <option>6 TB+</option>
+              </select>
+              <span class="hint-line">Drugi dysk na <strong>wszystkie dane poza systemem</strong>: gry, projekty, archiwa, materiał wideo.</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4: Monitor -->
+      <section class="block" data-step="4">
+        <h2><span class="num">4</span> Monitor — czy chcesz skonsultować?</h2>
+        <p class="tiny">Możesz zostawić puste — skonsultujemy to oddzielnie.</p>
+        <div class="grid">
+          <label class="opt-square"><input type="radio" name="monitor_consult_b" value="Nie" data-toggle="radio" data-show-when="Tak" data-target="#monitor-details-b" /> <span class="icon">❌</span><span>Nie</span></label>
+          <label class="opt-square"><input type="radio" name="monitor_consult_b" value="Tak" data-toggle="radio" data-show-when="Tak" data-target="#monitor-details-b" /> <span class="icon">✅</span><span>Tak</span></label>
+        </div>
+        <div class="sub fade" id="monitor-details-b" hidden>
+          <h3>Parametry monitora</h3>
+          <div class="grid">
+            <label class="opt-square"><span class="icon">🖥️</span><span>Ilość monitorów</span>
+              <select name="monitor_count">
+                <option>1</option>
+                <option>2</option>
+                <option>3+</option>
+              </select>
+              <span class="hint-line">3+ monitorów → sprawdzimy wyjścia wideo GPU (HDMI/DP/USB‑C).</span>
+            </label>
+            <label class="opt-square"><span class="icon">🎯</span><span>Rodzaj</span>
+              <select name="monitor_type">
+                <option>Biuro/uniwersalny</option>
+                <option>Gaming</option>
+                <option>Pro grafika/video</option>
+                <option>Ultrawide</option>
+                <option>Zakrzywiony</option>
+              </select>
+              <span class="hint-line">Gaming → wysoka częstotliwość; Pro grafika → lepsze kolory/kalibracja.</span>
+            </label>
+            <label class="opt-square"><span class="icon">⚡</span><span>Odświeżanie</span>
+              <select name="monitor_refresh">
+                <option>60 Hz</option>
+                <option>75 Hz</option>
+                <option>100 Hz</option>
+                <option>120 Hz</option>
+                <option>144 Hz</option>
+                <option>165 Hz</option>
+                <option>240 Hz+</option>
+              </select>
+              <span class="hint-line">144 Hz+ — płynne granie; 60–75 Hz — biuro/praca.</span>
+            </label>
+            <label class="opt-square"><span class="icon">📐</span><span>Rozmiar</span>
+              <select name="monitor_size">
+                <option>24"</option>
+                <option>27"</option>
+                <option>32"</option>
+                <option>34"+</option>
+              </select>
+              <span class="hint-line">27–32″: uniwersalnie; 34″+ ultrawide — szeroka przestrzeń robocza.</span>
+            </label>
+            <label class="opt-square"><span class="icon">🔍</span><span>Rozdzielczość</span>
+              <select name="monitor_res">
+                <option>Full HD</option>
+                <option>1440p</option>
+                <option>4K</option>
+                <option>UWQHD</option>
+              </select>
+              <span class="hint-line">1440p — sweet spot do gier; 4K — szczegóły, większe wymagania GPU.</span>
+            </label>
+            <label class="opt-square"><span class="icon">🧪</span><span>Rodzaj matrycy</span>
+              <select name="monitor_panel">
+                <option>IPS</option>
+                <option>VA</option>
+                <option>TN</option>
+                <option>OLED</option>
+              </select>
+              <span class="hint-line">IPS: kolory; VA: kontrast; TN: szybki budżet; OLED: czerń.</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5: Części posiadane -->
+      <section class="block" data-step="5">
+        <h2><span class="num">5</span> Czy masz już jakieś części?</h2>
+        <div class="grid">
+          <label class="opt-square"><input type="radio" name="parts_have" value="Nie" /> <span class="icon">📭</span><span>Nie</span></label>
+          <label class="opt-square inline-flex">
+            <input type="radio" name="parts_have" value="Tak" />
+            <span class="icon">🧰</span><span>Tak, jakie:</span>
+            <input class="flex-field" type="text" name="parts_list" placeholder="np. dysk SSD, obudowa…" />
+          </label>
+        </div>
+      </section>
+
+      <!-- 7: Kontakt -->
+      <section class="block" data-step="7">
+        <h2><span class="num">7</span> Kontakt</h2>
+        <p class="tiny"><strong>Informacja o kontakcie jest niezbędna</strong> do przygotowania rekomendacji.</p>
+        <label class="inline">E‑mail: <input type="email" name="contact_email" placeholder="twoj@mail.com" required /></label>
+        <label class="inline">Imię: <input type="text" name="contact_name" placeholder="Imię (opcjonalnie)" /></label>
+      </section>
+
+      <!-- 8: Budżet -->
+      <section class="block" data-step="8">
+        <h2><span class="num">8</span> Budżet na komputer (bez monitora i peryferiów)</h2>
+        <p class="tiny">Peryferia = klawiatura, mysz, słuchawki, głośniki.</p>
+        <div class="grid budget-grid">
+          <label class="opt-square"><input type="radio" name="budget_range" value="Do 2000 zł" /> <span class="icon">💸</span><span>Do&nbsp;2000&nbsp;zł</span></label>
+          <label class="opt-square"><input type="radio" name="budget_range" value="2000–5000 zł" /> <span class="icon">💵</span><span>2000–5000&nbsp;zł</span></label>
+          <label class="opt-square"><input type="radio" name="budget_range" value="5000–10000 zł" /> <span class="icon">💳</span><span>5000–10000&nbsp;zł</span></label>
+          <label class="opt-square"><input type="radio" name="budget_range" value="10000+ zł" /> <span class="icon">🏦</span><span>10000+&nbsp;zł</span></label>
+        </div>
+        <div class="inline nowrap">
+          <span>Lub wpisz kwotę ręcznie:</span>
+          <input type="number" name="budget_amount" min="0" step="100" placeholder="np. 6500" />
+          <span class="suffix">zł</span>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="submit" id="submit-btn-b">Wyślij</button>
+        <p id="status" role="status" aria-live="polite"></p>
+        <p class="tiny disclaimer">Te wybory nie są ostateczne — potraktuj je jako wstępny pogląd Twoich potrzeb. Skonsultuję z Tobą szczegóły osobno przed rekomendacją.</p>
+      </div>
+    </form>
+
+    <section class="thanks card" id="thanks" hidden>
+      <h2>Dziękuję! Odpowiem w ciągu jednego dnia.</h2>
+      <p class="tiny">Jeśli nie widzisz maila, sprawdź folder „Spam”.</p>
+      <div class="actions">
+        <a href="index.html" class="button">Wróć do strony głównej</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="tiny">Dbamy o prywatność — Twoje odpowiedzi służą jedynie do rekomendacji zestawu. Nie sprzedajemy danych. Możesz poprosić o usunięcie odpowiedzi.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>

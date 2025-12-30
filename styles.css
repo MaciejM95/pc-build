@@ -58,8 +58,10 @@ button:hover,.button:hover{ filter:brightness(1.08) }
 .opt-square.mini{ display:inline-flex; }
 .opt-square input[type="radio"], .opt-square input[type="checkbox"]{ accent-color: var(--accent); }
 .opt-square span{ color:var(--text); font-size:.95rem; }
+.opt-square .icon{ width:22px; text-align:center; filter:saturate(1.2); }
 .opt-square:hover{ border-color:#3a4864; }
 .opt-square input:checked + span{ font-weight:700; color:#eaf3ff; }
+.opt-square input:checked + .icon + span{ font-weight:700; color:#eaf3ff; }
 
 /* Select inside opt-square */
 .opt-square select{ margin-top:6px; }

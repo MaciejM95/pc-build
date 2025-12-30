@@ -1,4 +1,5 @@
 
+// Tryb Bazowy — brak innych formularzy
 document.addEventListener('DOMContentLoaded', () => {
   const sb = document.getElementById('submitted_at_b');
   if (sb) sb.value = new Date().toISOString();
@@ -105,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const status = document.getElementById('status');
     const btn = document.getElementById('submit-btn-b');
     const thanks = document.getElementById('thanks');
+    const form = document.getElementById('form-bazowy');
     form.addEventListener('submit', async (ev) => {
       ev.preventDefault();
       if (status) status.textContent = '';
