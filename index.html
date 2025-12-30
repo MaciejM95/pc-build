@@ -17,7 +17,6 @@
     </nav>
   </header>
 
-  <!-- MODE BAR: Bazowy / Pro / SimRig -->
   <section class="modebar">
     <div class="segmented" role="tablist" aria-label="Wybór trybu">
       <label class="seg"><input type="radio" name="build_mode" value="Bazowy" checked /><span role="tab" aria-selected="true">Bazowy</span></label>
@@ -27,7 +26,6 @@
     <p id="mode-note" class="tiny">Tryb <strong>Bazowy</strong> — prosty dobór bez szczegółowej konfiguracji podzespołów.</p>
   </section>
 
-  <!-- Progress bar (sticky) -->
   <div class="progressbar" aria-label="Postęp"> 
     <div class="progress-fill"></div>
     <div class="progress-text">Krok <span id="progress-step">1</span>/<span id="progress-total">8</span></div>
@@ -43,10 +41,9 @@
     <form id="form-bazowy" class="card mode" data-mode="Bazowy" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera (Bazowy)" />
       <input type="hidden" name="submitted_at" id="submitted_at_b" />
-      <input type="hidden" name="form_version" value="v3.1-bazowy" />
+      <input type="hidden" name="form_version" value="v3.3-bazowy" />
       <input type="hidden" name="build_mode" value="Bazowy" />
 
-      <!-- 1: Zastosowanie główne -->
       <section class="block" data-step="1">
         <h2><span class="num">1</span> Zastosowanie główne</h2>
         <div class="grid">
@@ -60,62 +57,59 @@
             <input type="text" name="usage_other" placeholder="Doprecyzuj (opcjonalnie)" />
           </label>
         </div>
-
-        <!-- Gry (bez monitora w podkategorii) -->
         <div class="sub cond" data-condition="Gry" hidden>
           <h3>Podkategoria: Gry</h3>
           <div class="grid">
-            <label><input type="checkbox" name="gaming_kinds[]" value="E‑sport (CS, LoL, Valorant)" /> E‑sport (CS, LoL, Valorant)</label>
-            <label><input type="checkbox" name="gaming_kinds[]" value="Gry AAA (Wiedźmin, Cyberpunk, God of War)" /> Gry AAA</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="E‑sport" /> E‑sport</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="AAA" /> AAA</label>
             <label><input type="checkbox" name="gaming_kinds[]" value="VR" /> VR</label>
             <label><input type="checkbox" name="gaming_kinds[]" value="SimRacing" /> SimRacing</label>
-            <label><input type="checkbox" name="gaming_kinds[]" value="Strategie (RTS/4X)" /> Strategie (RTS/4X)</label>
+            <label><input type="checkbox" name="gaming_kinds[]" value="Strategie" /> Strategie</label>
             <label><input type="checkbox" name="gaming_kinds[]" value="MMO" /> MMO</label>
-            <label class="inline">Inne: <input type="text" name="gaming_other" placeholder="np. symulatory lotnicze" /></label>
           </div>
         </div>
       </section>
 
-      <!-- 2: Obudowa -->
       <section class="block" data-step="2">
         <h2><span class="num">2</span> Obudowa — preferencje rozmiaru</h2>
-        <div class="case-descriptions">
-          <label class="case-option">
-            <span><input type="radio" name="case_size" value="Mini‑PC (SFF)" /> Mini‑PC (SFF)</span>
-            <small class="tiny">Małe przestrzenie, biuro, HTPC. Ograniczone chłodzenie i miejsce na GPU.</small>
-          </label>
-          <label class="case-option">
-            <span><input type="radio" name="case_size" value="Mini‑ITX" /> Mini‑ITX</span>
-            <small class="tiny">Kompaktowo/gaming w małej obudowie. Trudniejsze chłodzenie, 1 slot GPU.</small>
-          </label>
-          <label class="case-option">
-            <span><input type="radio" name="case_size" value="mATX" /> mATX</span>
-            <small class="tiny">Kompromis: więcej slotów niż ITX, mniejsze niż ATX. Cicho/kompaktowo.</small>
-          </label>
-          <label class="case-option">
-            <span><input type="radio" name="case_size" value="ATX" /> ATX</span>
-            <small class="tiny">Uniwersalnie: dobre chłodzenie, łatwa rozbudowa, pełna kompatybilność.</small>
-          </label>
-          <label class="case-option">
-            <span><input type="radio" name="case_size" value="Full Tower" /> Full Tower</span>
-            <small class="tiny">Mocne/ciche zestawy, chłodzenie wodne, wiele dysków, duże GPU.</small>
-          </label>
-          <label class="case-option">
-            <span><input type="radio" name="case_size" value="Bez znaczenia" /> Bez znaczenia</span>
-            <small class="tiny">Dobierzemy rozmiar pod potrzeby i budżet.</small>
-          </label>
+        <div class="case-layout">
+          <div class="case-descriptions">
+            <label class="case-option">
+              <span><input type="radio" name="case_size" value="Mini‑ITX (Mini)" /> Mini‑ITX (Mini)</span>
+              <small class="tiny">Kompaktowo/gaming w małej obudowie. Trudniejsze chłodzenie, 1 slot GPU.</small>
+            </label>
+            <label class="case-option">
+              <span><input type="radio" name="case_size" value="mATX (Mały)" /> mATX (Mały)</span>
+              <small class="tiny">Kompromis: więcej slotów niż ITX, mniejsze niż ATX. Cicho/kompaktowo.</small>
+            </label>
+            <label class="case-option">
+              <span><input type="radio" name="case_size" value="ATX (Standardowy)" /> ATX (Standardowy)</span>
+              <small class="tiny">Uniwersalnie: dobre chłodzenie, łatwa rozbudowa, pełna kompatybilność.</small>
+            </label>
+            <label class="case-option">
+              <span><input type="radio" name="case_size" value="Full Tower (Duży)" /> Full Tower (Duży)</span>
+              <small class="tiny">Mocne/ciche zestawy, chłodzenie wodne, wiele dysków, duże GPU.</small>
+            </label>
+            <label class="case-option">
+              <span><input type="radio" name="case_size" value="Bez znaczenia" /> Bez znaczenia</span>
+              <small class="tiny">Dobierzemy rozmiar pod potrzeby i budżet.</small>
+            </label>
+          </div>
+          <aside class="case-info" id="case-info">
+            <h3>Opis rozmiaru</h3>
+            <p class="tiny" id="case-info-text">Wybierz rozmiar po lewej — tutaj pokażemy krótki opis praktycznych zastosowań.</p>
+          </aside>
         </div>
       </section>
 
-      <!-- 3: Dysk -->
       <section class="block" data-step="3">
         <h2><span class="num">3</span> Dysk — preferencje dla dysku systemowego</h2>
         <p class="tiny">Jeśli wybierzesz „Nie”, <strong>skonsultujemy to oddzielnie</strong> po kontakcie.</p>
         <div class="grid">
-          <label><input type="radio" name="os_drive_pref" value="Nie" /> Nie</label>
-          <label><input type="radio" name="os_drive_pref" value="Tak" /> Tak</label>
+          <label><input type="radio" name="os_drive_pref_b" value="Nie" /> Nie</label>
+          <label><input type="radio" name="os_drive_pref_b" value="Tak" /> Tak</label>
         </div>
-        <div class="sub" id="storage-details" hidden>
+        <div class="sub" id="storage-details-b" hidden>
           <h3>Konfiguracja i rozmiary</h3>
           <div class="grid">
             <label>Konfiguracja dysków:
@@ -149,15 +143,14 @@
         </div>
       </section>
 
-      <!-- 4: Monitor (po usunięciu OS jest teraz #4) -->
       <section class="block" data-step="4">
         <h2><span class="num">4</span> Monitor — czy chcesz skonsultować?</h2>
         <p class="tiny">Możesz zostawić puste — skonsultujemy to oddzielnie.</p>
         <div class="grid">
-          <label><input type="radio" name="monitor_consult" value="Nie" /> Nie</label>
-          <label><input type="radio" name="monitor_consult" value="Tak" /> Tak</label>
+          <label><input type="radio" name="monitor_consult_b" value="Nie" /> Nie</label>
+          <label><input type="radio" name="monitor_consult_b" value="Tak" /> Tak</label>
         </div>
-        <div class="sub" id="monitor-details" hidden>
+        <div class="sub" id="monitor-details-b" hidden>
           <h3>Parametry monitora</h3>
           <div class="grid">
             <label>Ilość monitorów:
@@ -221,7 +214,6 @@
         </div>
       </section>
 
-      <!-- 5: Części posiadane -->
       <section class="block" data-step="5">
         <h2><span class="num">5</span> Czy masz już jakieś części?</h2>
         <div class="grid">
@@ -234,14 +226,12 @@
         </div>
       </section>
 
-      <!-- 6: Uwagi -->
       <section class="block" data-step="6">
         <h2><span class="num">6</span> Dodatkowe uwagi / oczekiwania</h2>
         <textarea name="notes" rows="4" placeholder="np. „ma być bardzo cichy”, „dużo RGB”, „pod 2–3 monitory”, „możliwa rozbudowa”, „chłodzenie wodne”"></textarea>
         <p class="tiny">(Możesz zostawić puste — dopytamy w odpowiedzi)</p>
       </section>
 
-      <!-- 7: Kontakt -->
       <section class="block" data-step="7">
         <h2><span class="num">7</span> Kontakt</h2>
         <p class="tiny"><strong>Informacja o kontakcie jest niezbędna</strong> do przygotowania rekomendacji.</p>
@@ -249,7 +239,6 @@
         <label class="inline">Imię: <input type="text" name="contact_name" placeholder="Imię (opcjonalnie)" /></label>
       </section>
 
-      <!-- 8: Budżet -->
       <section class="block" data-step="8">
         <h2><span class="num">8</span> Budżet na komputer (bez monitora i peryferiów)</h2>
         <p class="tiny">Peryferia = klawiatura, mysz, słuchawki, głośniki.</p>
@@ -273,410 +262,56 @@
       </div>
     </form>
 
-    <!-- MODE: Pro (bez OS kroku) -->
+    <!-- MODE: Pro (shortened, no toggles needed) -->
     <form id="form-pro" class="card mode" data-mode="Pro" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate hidden>
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera (Pro)" />
       <input type="hidden" name="submitted_at" id="submitted_at_p" />
-      <input type="hidden" name="form_version" value="v3.1-pro" />
+      <input type="hidden" name="form_version" value="v3.3-pro" />
       <input type="hidden" name="build_mode" value="Pro" />
-
-      <!-- 1: CPU -->
-      <section class="block" data-step="1">
-        <h2><span class="num">1</span> CPU — preferencje</h2>
-        <div class="grid">
-          <label>Producent:
-            <select name="cpu_vendor">
-              <option>Bez znaczenia</option>
-              <option>Intel</option>
-              <option>AMD</option>
-            </select>
-          </label>
-          <label>Priorytet:
-            <select name="cpu_priority">
-              <option>Wydajność jednowątkowa</option>
-              <option>Wielowątkowość</option>
-              <option>Balans</option>
-            </select>
-          </label>
-          <label>iGPU potrzebne?
-            <select name="cpu_igpu">
-              <option>Nie</option>
-              <option>Tak</option>
-            </select>
-          </label>
-          <label>Overclocking?
-            <select name="cpu_oc">
-              <option>Nie</option>
-              <option>Tak (lekki)</option>
-              <option>Tak (agresywny)</option>
-            </select>
-          </label>
-        </div>
+      <section class="block" data-step="1"><h2><span class="num">1</span> CPU</h2><div class="grid">
+        <label>Producent:<select name="cpu_vendor"><option>Bez znaczenia</option><option>Intel</option><option>AMD</option></select></label>
+        <label>Priorytet:<select name="cpu_priority"><option>Jednowątkowość</option><option>Wielowątkowość</option><option>Balans</option></select></label>
+        <label>iGPU:<select name="cpu_igpu"><option>Nie</option><option>Tak</option></select></label>
+      </div></section>
+      <section class="block" data-step="2"><h2><span class="num">2</span> GPU</h2><div class="grid">
+        <label>Rozdzielczość:<select name="pro_monitor_res"><option>Full HD</option><option>1440p</option><option>4K</option><option>UWQHD</option></select></label>
+        <label>Odświeżanie:<select name="pro_monitor_refresh"><option>60 Hz</option><option>120 Hz</option><option>144 Hz</option><option>240 Hz+</option></select></label>
+      </div></section>
+      <section class="block" data-step="3"><h2><span class="num">3</span> RAM</h2><div class="grid">
+        <label>Pojemność:<select name="ram_capacity"><option>16 GB</option><option>32 GB</option><option>64 GB</option><option>128 GB</option></select></label>
+        <label>Typ:<select name="ram_type"><option>DDR4</option><option>DDR5</option></select></label>
+      </div></section>
+      <section class="block" data-step="4"><h2><span class="num">4</span> Storage</h2><div class="grid">
+        <label>Dysk systemowy:<select name="pro_os_drive"><option>SSD NVMe 256 GB</option><option>SSD NVMe 512 GB</option><option>SSD NVMe 1 TB</option><option>SSD NVMe 2 TB</option></select><span class="hint-line">Minimum 256 GB.</span></label>
+        <label>Archiwum (drugi dysk):<select name="pro_archive"><option>Brak</option><option>HDD 2 TB</option><option>HDD 4 TB</option><option>HDD 8 TB</option></select><span class="hint-line">Wszystkie dane poza systemem.</span></label>
+      </div></section>
+      <section class="block" data-step="5"><h2><span class="num">5</span> Kontakt / Budżet</h2>
+        <p class="tiny"><strong>Kontakt jest niezbędny</strong>.</p>
+        <label class="inline">E‑mail: <input type="email" name="contact_email" required /></label>
+        <div class="grid budget-grid"><label><input type="radio" name="budget_range" value="2000–5000 zł" /> 2000–5000 zł</label><label><input type="radio" name="budget_range" value="5000–10000 zł" /> 5000–10000 zł</label></div>
       </section>
-
-      <!-- 2: GPU -->
-      <section class="block" data-step="2">
-        <h2><span class="num">2</span> GPU — docelowa rozdzielczość/odświeżanie</h2>
-        <div class="grid">
-          <label>Rozdzielczość:
-            <select name="pro_monitor_res">
-              <option>Full HD</option>
-              <option>1440p</option>
-              <option>4K</option>
-              <option>UWQHD</option>
-            </select>
-          </label>
-          <label>Odświeżanie:
-            <select name="pro_monitor_refresh">
-              <option>60 Hz</option>
-              <option>75 Hz</option>
-              <option>100 Hz</option>
-              <option>120 Hz</option>
-              <option>144 Hz</option>
-              <option>165 Hz</option>
-              <option>240 Hz+</option>
-            </select>
-          </label>
-          <label>Zastosowanie GPU:
-            <select name="gpu_use">
-              <option>Gry AAA</option>
-              <option>VR</option>
-              <option>Montaż wideo</option>
-              <option>Grafika 3D / render</option>
-              <option>AI/ML</option>
-            </select>
-          </label>
-          <label>Preferencja VRAM:
-            <select name="gpu_vram">
-              <option>8 GB</option>
-              <option>12 GB</option>
-              <option>16 GB</option>
-              <option>24 GB+</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <!-- 3: RAM -->
-      <section class="block" data-step="3">
-        <h2><span class="num">3</span> RAM — pojemność i typ</h2>
-        <div class="grid">
-          <label>Pojemność:
-            <select name="ram_capacity">
-              <option>16 GB</option>
-              <option>32 GB</option>
-              <option>64 GB</option>
-              <option>128 GB</option>
-            </select>
-          </label>
-          <label>Typ:
-            <select name="ram_type">
-              <option>DDR4</option>
-              <option>DDR5</option>
-            </select>
-          </label>
-          <label>Estetyka:
-            <select name="ram_aesthetics">
-              <option>Bez znaczenia</option>
-              <option>RGB</option>
-              <option>Czarne/bez RGB</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <!-- 4: Storage -->
-      <section class="block" data-step="4">
-        <h2><span class="num">4</span> Storage — szczegóły</h2>
-        <div class="grid">
-          <label>Dysk systemowy:
-            <select name="pro_os_drive">
-              <option>SSD NVMe 256 GB</option>
-              <option>SSD NVMe 512 GB</option>
-              <option>SSD NVMe 1 TB</option>
-              <option>SSD NVMe 2 TB</option>
-            </select>
-            <span class="hint-line">Minimum <strong>256 GB</strong>; 512 GB wygodniejsze; 1 TB do gier/wideo.</span>
-          </label>
-          <label>Dysk roboczy/scratch:
-            <select name="pro_scratch">
-              <option>Brak</option>
-              <option>SSD NVMe 1 TB</option>
-              <option>SSD NVMe 2 TB</option>
-            </select>
-          </label>
-          <label>Archiwum danych (drugi dysk):
-            <select name="pro_archive">
-              <option>Brak</option>
-              <option>HDD 2 TB</option>
-              <option>HDD 4 TB</option>
-              <option>HDD 8 TB</option>
-              <option>NAS / zewnętrzny</option>
-            </select>
-            <span class="hint-line">Drugi dysk na <strong>wszystkie dane poza systemem</strong> — gry, projekty, wideo, archiwa.</span>
-          </label>
-          <label>RAID:
-            <select name="pro_raid">
-              <option>Brak</option>
-              <option>RAID 1 (mirror)</option>
-              <option>RAID 0 (wydajność)</option>
-              <option>RAID 5/10</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <!-- 5: Płyta główna -->
-      <section class="block" data-step="5">
-        <h2><span class="num">5</span> Płyta główna — wymagania</h2>
-        <div class="grid">
-          <label>Form factor:
-            <select name="mb_form">
-              <option>ATX</option>
-              <option>mATX</option>
-              <option>Mini‑ITX</option>
-            </select>
-          </label>
-          <label>M.2 sloty:
-            <select name="mb_m2">
-              <option>2</option>
-              <option>3</option>
-              <option>4+</option>
-            </select>
-          </label>
-          <label>Wi‑Fi na płycie?
-            <select name="mb_wifi">
-              <option>Tak</option>
-              <option>Nie</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <!-- 6: Chłodzenie -->
-      <section class="block" data-step="6">
-        <h2><span class="num">6</span> Chłodzenie — preferencje</h2>
-        <div class="grid">
-          <label>Typ:
-            <select name="cooling_type">
-              <option>Powietrzne</option>
-              <option>AIO (woda)</option>
-            </select>
-          </label>
-          <label>Hałas:
-            <select name="noise_pref">
-              <option>Standard</option>
-              <option>Cicho</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <!-- 7: PSU -->
-      <section class="block" data-step="7">
-        <h2><span class="num">7</span> Zasilacz (PSU)</h2>
-        <div class="grid">
-          <label>Moc:
-            <select name="psu_wattage">
-              <option>650 W</option>
-              <option>750 W</option>
-              <option>850 W</option>
-              <option>1000 W+</option>
-            </select>
-          </label>
-          <label>Modularność:
-            <select name="psu_mod">
-              <option>Standard</option>
-              <option>Półmodularny</option>
-              <option>W pełni modularny</option>
-            </select>
-          </label>
-          <label>Sprawność:
-            <select name="psu_eff">
-              <option>80+ Bronze</option>
-              <option>80+ Gold</option>
-              <option>80+ Platinum</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <!-- 8: Case — airflow/silence + Kontakt/Budżet -->
-      <section class="block" data-step="8">
-        <h2><span class="num">8</span> Obudowa / Kontakt / Budżet</h2>
-        <div class="grid">
-          <label>Priorytet obudowy:
-            <select name="case_priority">
-              <option>Airflow (chłodne)</option>
-              <option>Silence (ciche)</option>
-              <option>Balans</option>
-            </select>
-          </label>
-          <label>Front I/O:
-            <select name="case_io">
-              <option>Standard USB‑A</option>
-              <option>USB‑C wymagane</option>
-            </select>
-          </label>
-        </div>
-        <hr />
-        <p class="tiny"><strong>Kontakt jest niezbędny</strong> do przygotowania rekomendacji.</p>
-        <label class="inline">E‑mail: <input type="email" name="contact_email" placeholder="twoj@mail.com" required /></label>
-        <label class="inline">Imię: <input type="text" name="contact_name" placeholder="Imię (opcjonalnie)" /></label>
-        <h3>Budżet (bez monitora i peryferiów)</h3>
-        <p class="tiny">Peryferia = klawiatura, mysz, słuchawki, głośniki.</p>
-        <div class="grid budget-grid">
-          <label><input type="radio" name="budget_range" value="Do 2000 zł" /> Do&nbsp;2000&nbsp;zł</label>
-          <label><input type="radio" name="budget_range" value="2000–5000 zł" /> 2000–5000&nbsp;zł</label>
-          <label><input type="radio" name="budget_range" value="5000–10000 zł" /> 5000–10000&nbsp;zł</label>
-          <label><input type="radio" name="budget_range" value="10000+ zł" /> 10000+&nbsp;zł</label>
-        </div>
-        <div class="inline nowrap">
-          <span>Lub wpisz kwotę ręcznie:</span>
-          <input type="number" name="budget_amount" min="0" step="100" placeholder="np. 9000" />
-          <span class="suffix">zł</span>
-        </div>
-      </section>
-
-      <div class="actions">
-        <button type="submit" id="submit-btn-p">Wyślij</button>
-        <p id="status" role="status" aria-live="polite"></p>
-        <p class="tiny disclaimer">Te wybory nie są ostateczne — potraktuj je jako wstępny pogląd Twoich potrzeb. Skonsultuję z Tobą szczegóły osobno.</p>
-      </div>
+      <div class="actions"><button type="submit" id="submit-btn-p">Wyślij</button><p id="status" role="status" aria-live="polite"></p></div>
     </form>
 
-    <!-- MODE: SimRig (bez OS kroku) -->
+    <!-- MODE: SimRig (shortened) -->
     <form id="form-simrig" class="card mode" data-mode="SimRig" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate hidden>
       <input type="hidden" name="_subject" value="Kwestionariusz – dobór komputera (SimRig)" />
       <input type="hidden" name="submitted_at" id="submitted_at_s" />
-      <input type="hidden" name="form_version" value="v3.1-simrig" />
+      <input type="hidden" name="form_version" value="v3.3-simrig" />
       <input type="hidden" name="build_mode" value="SimRig" />
-
-      <!-- 1: Symulatory / Tytuły -->
-      <section class="block" data-step="1">
-        <h2><span class="num">1</span> Gry/symulatory</h2>
-        <div class="grid">
-          <label><input type="checkbox" name="sim_titles[]" value="iRacing" /> iRacing</label>
-          <label><input type="checkbox" name="sim_titles[]" value="Assetto Corsa Competizione" /> ACC</label>
-          <label><input type="checkbox" name="sim_titles[]" value="rFactor 2" /> rFactor 2</label>
-          <label><input type="checkbox" name="sim_titles[]" value="Automobilista 2" /> AMS2</label>
-          <label class="inline">Inne: <input type="text" name="sim_other" placeholder="np. Dirt Rally" /></label>
-        </div>
+      <section class="block" data-step="1"><h2><span class="num">1</span> Gry/symulatory</h2><div class="grid">
+        <label><input type="checkbox" name="sim_titles[]" value="iRacing" /> iRacing</label>
+        <label><input type="checkbox" name="sim_titles[]" value="ACC" /> ACC</label>
+      </div></section>
+      <section class="block" data-step="2"><h2><span class="num">2</span> Wyświetlanie</h2><div class="grid">
+        <label>Konfiguracja:<select name="sim_display_mode"><option>Triple monitors</option><option>Ultrawide</option><option>VR</option></select></label>
+      </div></section>
+      <section class="block" data-step="3"><h2><span class="num">3</span> Kontakt / Budżet</h2>
+        <p class="tiny"><strong>Kontakt jest niezbędny</strong>.</p>
+        <label class="inline">E‑mail: <input type="email" name="contact_email" required /></label>
+        <div class="grid budget-grid"><label><input type="radio" name="budget_range" value="5000–10000 zł" /> 5000–10000 zł</label><label><input type="radio" name="budget_range" value="10000+ zł" /> 10000+ zł</label></div>
       </section>
-
-      <!-- 2: Wyświetlanie -->
-      <section class="block" data-step="2">
-        <h2><span class="num">2</span> Wyświetlanie — Triple/Ultrawide/VR</h2>
-        <div class="grid">
-          <label>Konfiguracja:
-            <select name="sim_display_mode">
-              <option>Triple monitors</option>
-              <option>Ultrawide</option>
-              <option>VR</option>
-            </select>
-          </label>
-          <label>Cel FPS:
-            <select name="sim_target_fps">
-              <option>60</option>
-              <option>90</option>
-              <option>120</option>
-              <option>144+</option>
-            </select>
-          </label>
-          <label>Rozdzielczość bazowa:
-            <select name="sim_resolution">
-              <option>Full HD</option>
-              <option>1440p</option>
-              <option>4K</option>
-              <option>UWQHD</option>
-            </select>
-          </label>
-        </div>
-        <div class="sub">
-          <h3>Szczegóły (opcjonalne)</h3>
-          <div class="grid">
-            <label>Triple: rozmiar/odświeżanie:
-              <input type="text" name="sim_triples" placeholder="np. 3×27" 1440p 144 Hz" />
-            </label>
-            <label>VR: zestaw/model:
-              <input type="text" name="sim_vr_headset" placeholder="np. Meta/Valve/HP (placeholder)" />
-            </label>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3: Preferencje GPU/CPU -->
-      <section class="block" data-step="3">
-        <h2><span class="num">3</span> GPU/CPU — cele</h2>
-        <div class="grid">
-          <label>Poziom GPU:
-            <select name="sim_gpu_tier">
-              <option>Średni (1440p/60–90 FPS)</option>
-              <option>Wysoki (1440p/120–144 FPS)</option>
-              <option>VR mocny (90–120 FPS)</option>
-            </select>
-          </label>
-          <label>CPU — jednowątkowość:
-            <select name="sim_cpu_single">
-              <option>Wysoka</option>
-              <option>Średnia</option>
-            </select>
-          </label>
-          <label>AI / liczba przeciwników:
-            <select name="sim_ai_count">
-              <option>Do 20</option>
-              <option>21–40</option>
-              <option>41+</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <!-- 4: Akcesoria / Telemetria (placeholder) -->
-      <section class="block" data-step="4">
-        <h2><span class="num">4</span> Akcesoria / Telemetria</h2>
-        <div class="grid">
-          <label>Telemetria/dash:
-            <select name="sim_telemetry">
-              <option>Brak</option>
-              <option>Tak (SimHub/dash)</option>
-            </select>
-          </label>
-          <label>USB hub / dodatkowe urządzenia:
-            <select name="sim_usb">
-              <option>Brak</option>
-              <option>Tak (wiele urządzeń)</option>
-            </select>
-          </label>
-        </div>
-      </section>
-
-      <!-- 5: Kontakt / Budżet -->
-      <section class="block" data-step="5">
-        <h2><span class="num">5</span> Kontakt / Budżet</h2>
-        <p class="tiny"><strong>Kontakt jest niezbędny</strong> do przygotowania rekomendacji.</p>
-        <label class="inline">E‑mail: <input type="email" name="contact_email" placeholder="twoj@mail.com" required /></label>
-        <label class="inline">Imię: <input type="text" name="contact_name" placeholder="Imię (opcjonalnie)" /></label>
-        <h3>Budżet (bez monitora i peryferiów)</h3>
-        <p class="tiny">Peryferia = klawiatura, mysz, słuchawki, głośniki.</p>
-        <div class="grid budget-grid">
-          <label><input type="radio" name="budget_range" value="Do 2000 zł" /> Do&nbsp;2000&nbsp;zł</label>
-          <label><input type="radio" name="budget_range" value="2000–5000 zł" /> 2000–5000&nbsp;zł</label>
-          <label><input type="radio" name="budget_range" value="5000–10000 zł" /> 5000–10000&nbsp;zł</label>
-          <label><input type="radio" name="budget_range" value="10000+ zł" /> 10000+&nbsp;zł</label>
-        </div>
-        <div class="inline nowrap">
-          <span>Lub wpisz kwotę ręcznie:</span>
-          <input type="number" name="budget_amount" min="0" step="100" placeholder="np. 12000" />
-          <span class="suffix">zł</span>
-        </div>
-      </section>
-
-      <div class="actions">
-        <button type="submit" id="submit-btn-s">Wyślij</button>
-        <p id="status" role="status" aria-live="polite"></p>
-        <p class="tiny disclaimer">Wybory są wstępne — skonsultujemy szczegóły, w tym rig/akcesoria, przed rekomendacją.</p>
-      </div>
+      <div class="actions"><button type="submit" id="submit-btn-s">Wyślij</button><p id="status" role="status" aria-live="polite"></p></div>
     </form>
 
     <section class="thanks card" id="thanks" hidden>

@@ -1,168 +1,100 @@
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Timestamp per form
+  // timestamps
   const ts = new Date().toISOString();
-  const sb = document.getElementById('submitted_at_b');
-  const sp = document.getElementById('submitted_at_p');
-  const ss = document.getElementById('submitted_at_s');
-  if (sb) sb.value = ts; if (sp) sp.value = ts; if (ss) ss.value = ts;
+  ['submitted_at_b','submitted_at_p','submitted_at_s'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=ts; });
 
-  // Mode switching
+  // mode switch
   const modeNote = document.getElementById('mode-note');
   const modeRadios = document.querySelectorAll('input[name="build_mode"]');
-  const forms = {
-    'Bazowy': document.getElementById('form-bazowy'),
-    'Pro': document.getElementById('form-pro'),
-    'SimRig': document.getElementById('form-simrig')
-  };
+  const forms = { Bazowy: document.getElementById('form-bazowy'), Pro: document.getElementById('form-pro'), SimRig: document.getElementById('form-simrig') };
   const modeTexts = {
-    'Bazowy': 'prosty dobór bez szczegółowej konfiguracji podzespołów.',
-    'Pro': 'szczegółowe wybory poszczególnych podzespołów (CPU/GPU/RAM/Storage/MB/Chłodzenie/PSU/Case/Budżet).',
-    'SimRig': 'builder zestawu do symracingu (gry, wyświetlanie, cele GPU/CPU, akcesoria).'
+    Bazowy: 'prosty dobór bez szczegółowej konfiguracji podzespołów.',
+    Pro: 'szczegółowe wybory poszczególnych podzespołów.',
+    SimRig: 'builder zestawu do symracingu.'
   };
-
-  function switchMode(val) {
-    Object.keys(forms).forEach(k => {
-      const f = forms[k]; if (!f) return; f.hidden = (k !== val);
-    });
-    if (modeNote) modeNote.innerHTML = `Tryb <strong>${val}</strong> — ${modeTexts[val]}`;
+  function switchMode(val){
+    Object.keys(forms).forEach(k=>{ const f=forms[k]; if(!f) return; f.hidden = (k!==val); });
+    if(modeNote) modeNote.innerHTML = `Tryb <strong>${val}</strong> — ${modeTexts[val]}`;
     setupProgress();
+    bindToggles();
   }
-  modeRadios.forEach(r => r.addEventListener('change', (e) => switchMode(e.target.value)));
-  switchMode(Array.from(modeRadios).find(r => r.checked)?.value || 'Bazowy');
+  modeRadios.forEach(r=>r.addEventListener('change',e=>switchMode(e.target.value)));
+  switchMode(Array.from(modeRadios).find(r=>r.checked)?.value || 'Bazowy');
 
-  // Bind usage conditional (Bazowy)
-  function bindUsageConditions(formEl) {
-    const usageCheckboxes = formEl.querySelectorAll('input[name="usage[]"]');
-    const conditionalBlocks = formEl.querySelectorAll('.cond');
-    function updateUsageConditions() {
-      const selected = new Set(Array.from(usageCheckboxes).filter(c => c.checked).map(c => c.value));
-      conditionalBlocks.forEach(block => {
-        const cond = block.getAttribute('data-condition');
-        block.hidden = !selected.has(cond);
-      });
+  // usage -> conditional (Bazowy)
+  function bindUsageConditions(){
+    const form = forms.Bazowy; if(!form) return;
+    const usage = form.querySelectorAll('input[name="usage[]"]');
+    const blocks = form.querySelectorAll('.cond');
+    function update(){
+      const selected = new Set(Array.from(usage).filter(c=>c.checked).map(c=>c.value));
+      blocks.forEach(b=>{ const cond=b.getAttribute('data-condition'); b.hidden = !selected.has(cond); });
     }
-    usageCheckboxes.forEach(cb => cb.addEventListener('change', updateUsageConditions));
-    updateUsageConditions();
+    usage.forEach(cb=>cb.addEventListener('change',update));
+    update();
   }
-  if (forms['Bazowy']) bindUsageConditions(forms['Bazowy']);
 
-  // Storage details toggle (any form containing os_drive_pref)
-  function bindStorageToggle(formEl) {
-    const osPrefRadios = formEl.querySelectorAll('input[name="os_drive_pref"]');
-    const storageDetails = formEl.querySelector('#storage-details');
-    if (!osPrefRadios.length || !storageDetails) return;
-    function updateStorage() {
-      const val = Array.from(osPrefRadios).find(r => r.checked)?.value;
-      storageDetails.hidden = (val !== 'Tak');
+  // generic toggles per visible form
+  function bindToggles(){
+    // Bazowy: storage
+    const fB = forms.Bazowy; if(fB){
+      const osRadios = fB.querySelectorAll('input[name="os_drive_pref_b"]');
+      const storage = fB.querySelector('#storage-details-b');
+      function updStorage(){ const val = Array.from(osRadios).find(r=>r.checked)?.value; if(storage) storage.hidden = (val!=='Tak'); }
+      osRadios.forEach(r=>r.addEventListener('change',updStorage)); updStorage();
+      // Monitor
+      const monRadios = fB.querySelectorAll('input[name="monitor_consult_b"]');
+      const monDetails = fB.querySelector('#monitor-details-b');
+      function updMonitor(){ const val = Array.from(monRadios).find(r=>r.checked)?.value; if(monDetails) monDetails.hidden = (val!=='Tak'); }
+      monRadios.forEach(r=>r.addEventListener('change',updMonitor)); updMonitor();
+      // Case info
+      const caseInfoText = document.getElementById('case-info-text');
+      const caseRadios = fB.querySelectorAll('input[name="case_size"]');
+      const caseMap = {
+        'Mini‑ITX (Mini)': 'Najmniejsza obudowa: 1 slot GPU, ograniczone chłodzenie — najlepsza do kompaktów.',
+        'mATX (Mały)': 'Mały, ale elastyczny: więcej slotów niż ITX, sensowny airflow, nadal kompakt.',
+        'ATX (Standardowy)': 'Najbardziej uniwersalny: pełna kompatybilność, rozbudowa, dobre chłodzenie.',
+        'Full Tower (Duży)': 'Najwięcej miejsca: świetny airflow, LC, wiele dysków, duże GPU; idealny do rozbudowy/ciszy.'
+      };
+      function updCase(){ const v = Array.from(caseRadios).find(r=>r.checked)?.value; if(caseInfoText) caseInfoText.textContent = caseMap[v] || 'Wybierz rozmiar po lewej — tutaj pokażemy opis.'; }
+      caseRadios.forEach(r=>r.addEventListener('change',updCase)); updCase();
     }
-    osPrefRadios.forEach(r => r.addEventListener('change', updateStorage));
-    updateStorage();
+    bindUsageConditions();
   }
-  Object.values(forms).forEach(f => f && bindStorageToggle(f));
 
-  // Monitor details toggle (Bazowy)
-  function bindMonitorToggle(formEl) {
-    const monitorRadios = formEl.querySelectorAll('input[name="monitor_consult"]');
-    const monitorDetails = formEl.querySelector('#monitor-details');
-    if (!monitorRadios.length || !monitorDetails) return;
-    function updateMonitor() {
-      const val = Array.from(monitorRadios).find(r => r.checked)?.value;
-      monitorDetails.hidden = (val !== 'Tak');
+  // progress bar for visible form
+  let observer; function setupProgress(){
+    const stepEl=document.getElementById('progress-step'); const totalEl=document.getElementById('progress-total'); const fillEl=document.querySelector('.progress-fill');
+    const visForm = Object.values(forms).find(f=>f && !f.hidden); if(!visForm) return;
+    const sections = Array.from(visForm.querySelectorAll('section.block')); const total = sections.length;
+    if(totalEl) totalEl.textContent = total;
+    function setProg(i){ const s=Math.min(Math.max(i,1),total); if(stepEl) stepEl.textContent=s; if(fillEl) fillEl.style.width = Math.round((s/total)*100)+'%'; }
+    if(observer) observer.disconnect();
+    observer = new IntersectionObserver((entries)=>{
+      let top=null; entries.forEach(e=>{ if(e.isIntersecting){ const step=Number(e.target.getAttribute('data-step')); const rect=e.target.getBoundingClientRect(); const vis=Math.max(0,Math.min(window.innerHeight,rect.bottom)-Math.max(0,rect.top)); top = (!top||vis>top.vis)?{step,vis}:top; } });
+      if(top) setProg(top.step);
+    }, { threshold:[0.3,0.6] });
+    sections.forEach(sec=>observer.observe(sec)); setProg(1);
+  }
+
+  // submit handlers
+  function bindSubmit(form, btnId){ if(!form) return; const status=document.getElementById('status'); const btn=form.querySelector('#'+btnId); const thanks=document.getElementById('thanks');
+    async function onSubmit(ev){ ev.preventDefault(); if(status) status.textContent=''; if(btn) btn.disabled=true;
+      const fd=new FormData(form);
+      const usage = fd.getAll('usage[]').join('; '); if(usage){ fd.delete('usage[]'); fd.set('usage', usage); }
+      const gamingKinds = fd.getAll('gaming_kinds[]').join('; '); if(gamingKinds){ fd.delete('gaming_kinds[]'); fd.set('gaming_kinds', gamingKinds); }
+      const simTitles = fd.getAll('sim_titles[]').join('; '); if(simTitles){ fd.delete('sim_titles[]'); fd.set('sim_titles', simTitles); }
+      const email = fd.get('contact_email'); if(!email || !/^\S+@\S+\.\S+$/.test(email)){ if(status) status.textContent='Podaj poprawny adres e‑mail (pole jest wymagane).'; if(btn) btn.disabled=false; return; }
+      const payload={}; for(const [k,v] of fd.entries()) payload[k]=v;
+      try{ const resp=await fetch(form.action,{ method:form.method, headers:{'Accept':'application/json','Content-Type':'application/json'}, body:JSON.stringify(payload)});
+        if(resp.ok){ form.hidden=true; if(thanks) thanks.hidden=false; } else { const data=await resp.json().catch(()=>({})); if(status) status.textContent=(data&&data.error)?`Błąd: ${data.error}`:'Wystąpił problem z wysyłką.'; }
+      } catch(e){ if(status) status.textContent='Brak połączenia lub błąd po stronie usługi.'; } finally { if(btn) btn.disabled=false; }
     }
-    monitorRadios.forEach(r => r.addEventListener('change', updateMonitor));
-    updateMonitor();
-  }
-  if (forms['Bazowy']) bindMonitorToggle(forms['Bazowy']);
-
-  // Progress bar per visible form
-  let observer;
-  function setupProgress() {
-    const progressStepEl = document.getElementById('progress-step');
-    const progressTotalEl = document.getElementById('progress-total');
-    const progressFillEl = document.querySelector('.progress-fill');
-    const visibleForm = Object.values(forms).find(f => f && !f.hidden);
-    if (!visibleForm) return;
-    const sections = Array.from(visibleForm.querySelectorAll('section.block'));
-    const totalSteps = sections.length;
-    if (progressTotalEl) progressTotalEl.textContent = totalSteps;
-
-    function setProgress(stepIndex) {
-      const step = Math.min(Math.max(stepIndex, 1), totalSteps);
-      if (progressStepEl) progressStepEl.textContent = step;
-      const pct = Math.round((step / totalSteps) * 100);
-      if (progressFillEl) progressFillEl.style.width = pct + '%';
-    }
-
-    if (observer) observer.disconnect();
-    observer = new IntersectionObserver((entries) => {
-      let topMost = null;
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const stepAttr = entry.target.getAttribute('data-step');
-          const rect = entry.target.getBoundingClientRect();
-          const visible = Math.max(0, Math.min(window.innerHeight, rect.bottom) - Math.max(0, rect.top));
-          topMost = (!topMost || visible > topMost.visible) ? { step: Number(stepAttr), visible } : topMost;
-        }
-      });
-      if (topMost) setProgress(topMost.step);
-    }, { root: null, threshold: [0.3, 0.6] });
-
-    sections.forEach(sec => observer.observe(sec));
-    setProgress(1);
+    form.addEventListener('submit', onSubmit);
   }
 
-  setupProgress();
-
-  // Submit handlers for 3 forms
-  function bindSubmit(formEl, submitBtnId) {
-    const status = document.getElementById('status');
-    const submitBtn = formEl.querySelector('#' + submitBtnId);
-    const thanks = document.getElementById('thanks');
-    async function handleSubmit(event) {
-      event.preventDefault();
-      if (status) status.textContent = '';
-      if (submitBtn) submitBtn.disabled = true;
-
-      const formData = new FormData(formEl);
-      // Arrays to CSV
-      const usage = formData.getAll('usage[]').join('; ');
-      const gamingKinds = formData.getAll('gaming_kinds[]').join('; ');
-      const simTitles = formData.getAll('sim_titles[]').join('; ');
-      if (usage) { formData.delete('usage[]'); formData.set('usage', usage); }
-      if (gamingKinds) { formData.delete('gaming_kinds[]'); formData.set('gaming_kinds', gamingKinds); }
-      if (simTitles) { formData.delete('sim_titles[]'); formData.set('sim_titles', simTitles); }
-
-      // E-mail required
-      const email = formData.get('contact_email');
-      if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-        if (status) status.textContent = 'Podaj poprawny adres e‑mail (pole jest wymagane).';
-        if (submitBtn) submitBtn.disabled = false;
-        return;
-      }
-
-      const payload = {}; for (const [key, value] of formData.entries()) payload[key] = value;
-      try {
-        const resp = await fetch(formEl.action, {
-          method: formEl.method,
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        if (resp.ok) { formEl.hidden = true; if (thanks) thanks.hidden = false; }
-        else {
-          const data = await resp.json().catch(() => ({}));
-          if (status) status.textContent = (data && data.error) ? `Błąd: ${data.error}` : 'Wystąpił problem z wysyłką.';
-        }
-      } catch (e) {
-        if (status) status.textContent = 'Brak połączenia lub błąd po stronie usługi.';
-      } finally {
-        if (submitBtn) submitBtn.disabled = false;
-      }
-    }
-    formEl.addEventListener('submit', handleSubmit);
-  }
-
-  bindSubmit(forms['Bazowy'], 'submit-btn-b');
-  bindSubmit(forms['Pro'], 'submit-btn-p');
-  bindSubmit(forms['SimRig'], 'submit-btn-s');
+  bindSubmit(forms.Bazowy, 'submit-btn-b');
+  bindSubmit(forms.Pro, 'submit-btn-p');
+  bindSubmit(forms.SimRig, 'submit-btn-s');
 });
